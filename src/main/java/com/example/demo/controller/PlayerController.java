@@ -4,6 +4,7 @@ import com.example.demo.entity.Song;
 import com.example.demo.entity.result.ResultEntity;
 import com.example.demo.service.PlayerService;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +24,7 @@ import java.util.Map;
 @Controller
 public class PlayerController
 {
-    @Resource
+    @Autowired
     private PlayerService playerService;
     @RequestMapping(value = "/play",method = RequestMethod.POST)
     @ResponseBody

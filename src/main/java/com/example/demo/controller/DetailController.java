@@ -4,18 +4,16 @@ package com.example.demo.controller;
 import com.example.demo.entity.*;
 import com.example.demo.entity.result.ResultEntity;
 import com.example.demo.service.*;
+import com.example.demo.util.AutoShowUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -91,7 +89,7 @@ public class DetailController {
         map.put("albums",albums);
         map.put("singer",singer);
         map.put("follownum",follownum);
-        return "/Details/singer_detail";
+        return "Details/singer_detail";
        //"songs" "albums" "follownum"
     }
     @RequestMapping(value ="/Album",method = RequestMethod.GET)
@@ -109,7 +107,7 @@ public class DetailController {
         map.put("author",author);
         map.put("songs",songs);
         map.put("album",album);
-        return "/Details/album_detail";
+        return "Details/album_detail";
     }
     @ResponseBody
     @RequestMapping(value ="/Comment",method = RequestMethod.POST)
@@ -120,18 +118,6 @@ public class DetailController {
             return "评论成功";
         else
             return "评论失败";
-    }
-    @ResponseBody
-    @RequestMapping(value = "/getMySongList", method = RequestMethod.GET)
-    public ModelAndView getMySongList(HttpServletRequest request, @RequestParam("songid") String songid){
-        User user = (User) request.getSession(false).getAttribute("user");
-        ResultEntity e = userService.getSongLists(user);
-        Map<String,Object>e_map = (Map<String, Object>) e.getObject();
-        ArrayList<SongList> createdsonglist = (ArrayList<SongList>)e_map.get("createdsonglist");
-        Map<String,Object>map = new HashMap<>();
-        map.put("songlists",createdsonglist);
-        map.put("toAdd",songid);
-        return new ModelAndView("/temp/songListChooser",map);
     }
     @RequestMapping(value ="/User",method = RequestMethod.GET)
     public String showUser(@RequestParam("userid") String userid, Map<String, Object> map,HttpServletRequest request){

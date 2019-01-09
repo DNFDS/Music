@@ -27,6 +27,10 @@ public class RegisterController {
     @RequestMapping(value ="/Register",method = RequestMethod.POST)
     public String toRegister(@RequestParam("name") String name,@RequestParam("pwd")String pwd, @RequestParam("pwd_again")String pwd_again,
                         Map<String, Object> map,HttpServletRequest request){
+        if(name==null||pwd==null){
+            map.put("errMsg","Illegal input");
+            return "Register";
+        }
         if(!pwd.equals(pwd_again)){
             map.put("errMsg","Passwords are different");
             return "Register";
