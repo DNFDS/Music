@@ -5,12 +5,13 @@ import com.example.demo.entity.result.ResultEntity;
 import com.example.demo.service.UserService;
 import com.example.demo.util.AutoShowUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -23,6 +24,20 @@ public class UserInterface {
     private UserService userService;
     @Autowired
     private AutoShowUtil showUtil;
+
+    @CrossOrigin("http://localhost:8080")
+    @RequestMapping(value ="/api/Login",method = RequestMethod.POST)
+    public ResultEntity Login(@RequestParam("id") String id, @RequestParam("pwd")String pwd, HttpServletRequest request){
+        User user = new User();
+        user.setUserid(id);
+        user.setUserpassword(pwd);
+        ResultEntity result = userService.SignIn(user);
+        if(result.getSuccess()){
+            request.getSession().setAttribute("user",result.getObject());
+            request.getSession().setAttribute("visted",result.getObject());
+        }
+        return result;
+    }
 
     @RequestMapping(value = "/profile/showFans", method = RequestMethod.GET)
     public ModelAndView showFans(HttpServletRequest request, HttpServletResponse response){

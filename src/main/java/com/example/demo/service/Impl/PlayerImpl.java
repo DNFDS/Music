@@ -5,7 +5,6 @@ import com.example.demo.dao.SongMapper;
 import com.example.demo.entity.Song;
 import com.example.demo.entity.SongList;
 import com.example.demo.service.PlayerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

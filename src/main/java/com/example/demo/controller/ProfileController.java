@@ -2,23 +2,16 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.Singer;
-import com.example.demo.entity.Song;
-import com.example.demo.entity.SongList;
 import com.example.demo.entity.User;
 import com.example.demo.entity.result.ResultEntity;
 import com.example.demo.service.SingerService;
-import com.example.demo.service.SongListService;
-import com.example.demo.service.SongService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller

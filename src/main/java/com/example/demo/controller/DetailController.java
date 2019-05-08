@@ -84,7 +84,6 @@ public class DetailController {
         map.put("isfollow",isfollow);
         int follownum = singerService.getFansNum(singerid);
         ResultEntity e = songListService.getSingerInSongList(songs);
-        ArrayList<ArrayList<Singer>> singers = (ArrayList<ArrayList<Singer>>)e.getObject();
         map.put("singers",e.getObject());
         map.put("albums",albums);
         map.put("singer",singer);
