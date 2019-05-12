@@ -2,10 +2,14 @@ package com.example.demo.userInterface;
 
 import com.example.demo.entity.User;
 import com.example.demo.entity.result.ResultEntity;
+import com.example.demo.service.SingerService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.AutoShowUtil;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,15 +21,52 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 public class UserInterface {
 
     @Autowired
     private UserService userService;
     @Autowired
+    private SingerService singerService;
+    @Autowired
     private AutoShowUtil showUtil;
 
-    @CrossOrigin("http://localhost:8080")
+    @GetMapping(value = "/api/getUser")
+    public Object getUser(@Param("id") String id) {
+        return userService.getUserById(id).getObject();
+    }
+
+    @GetMapping(value = "/api/getFans")
+    public Object getFans(@Param("id") String id) {
+        User user = new User();
+        user.setUserid(id);
+        ResultEntity e = userService.getFans(user);
+        return e.getObject();
+    }
+
+    @GetMapping(value = "/api/getFriends")
+    public Object getFollows(@Param("id") String id) {
+        User user = new User();
+        user.setUserid(id);
+        ResultEntity e = userService.getFriends(user);
+        return e.getObject();
+    }
+
+    @GetMapping(value = "/api/getFollowSinger")
+    public Object getFollowSinger(@Param("id") String id) {
+        User user = new User();
+        user.setUserid(id);
+        return singerService.getSingerUserLike(user.getUserid());
+    }
+
+    @GetMapping(value = "/api/getSongList")
+    public Object getSongList(@Param("id") String id) {
+        User user = new User();
+        user.setUserid(id);
+        return userService.getSongLists(user).getObject();
+    }
+    
     @RequestMapping(value ="/api/Login",method = RequestMethod.POST)
     public ResultEntity Login(@RequestParam("id") String id, @RequestParam("pwd")String pwd, HttpServletRequest request){
         User user = new User();
