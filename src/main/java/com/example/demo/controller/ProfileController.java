@@ -6,6 +6,8 @@ import com.example.demo.entity.User;
 import com.example.demo.entity.result.ResultEntity;
 import com.example.demo.service.SingerService;
 import com.example.demo.service.UserService;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -35,4 +37,11 @@ public class ProfileController {
         map.put("FriendsNum",friends.size()+singers.size());
         return "profile/like_song";
     }
+
+
+
+    // @RestController
+    // @GetMapping(value = "/api/getFans")
+    // public Map<String, Object> getFans(@Param("id") Integer id) {
+    // }
 }
