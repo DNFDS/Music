@@ -4,6 +4,7 @@ import com.example.demo.dao.AlbumMapper;
 import com.example.demo.dao.BuyMapper;
 import com.example.demo.dao.SongListMapper;
 import com.example.demo.dao.UserMapper;
+import com.example.demo.entity.BuyKey;
 import com.example.demo.entity.SongList;
 import com.example.demo.entity.User;
 import com.example.demo.entity.result.ResultEntity;
@@ -197,6 +198,16 @@ public class UserImpl implements UserService {
     @Override
     //购买音乐（实现）
     public ResultEntity buyMusic(String userid,String musicid,String type){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid",userid);
+        map.put("musicid",musicid);
+        buyMapper.getBuyRecord(map);
+        ArrayList<BuyKey> b=(ArrayList<BuyKey>)map.get("buyrecord");
+        for(int i=0;i<b.size();i++){
+            if(b.get(i).getUserid().equals(userid)&&b.get(i).getMusicid().equals(musicid)){
+                return new ResultEntity(false, "", "已购买过");
+            }
+        }
         Map<String,Object> mapMoney = new HashMap<>();
         mapMoney.put("op",2);
         mapMoney.put("money",type.equals("a")?15:2);

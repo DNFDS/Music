@@ -39,3 +39,24 @@ get {{url}}/getSinger?singerid=
 
 ###
 get {{url}}/getAlbum?albumid=1000000
+
+#################### about friend
+###
+get {{url}}/showFollowUser?id=100000
+
+###
+get {{url}}/isFollowed?uid=100000&fid=100001
+
+###
+get {{url}}/changeFollow?uid=100000&fid=100001
+
+#################### about buy
+###
+get {{url}}/setVIP?id=100000
+
+###
+get {{url}}/buyMusic?id=100000&mid=4000001&type=s
+
+###
+get {{url}}/charge?id=100000&money=50
+

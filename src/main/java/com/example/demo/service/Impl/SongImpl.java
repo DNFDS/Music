@@ -43,7 +43,7 @@ public class SongImpl implements SongService {
         ArrayList<Song> songs = new ArrayList<>();
         ArrayList<Buy> buys = (ArrayList<Buy>)map.get("buyrecord");
         for(Buy buy:buys){
-            map.put("songid",buy.getSongid());
+            map.put("songid",buy.getMusicid());
             songMapper.getSongById(map);
             songs.add((Song) map.get("songs"));
         }
