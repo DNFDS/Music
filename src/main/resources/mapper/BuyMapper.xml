@@ -2,15 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.dao.BuyMapper" >
   <resultMap id="BuyResultMap" type="com.example.demo.entity.Buy" >
-    <id column="SONGID" property="songid" jdbcType="VARCHAR" />
+    <id column="MUSICID" property="musicid" jdbcType="VARCHAR" />
     <id column="USERID" property="userid" jdbcType="VARCHAR" />
     <result column="BUYTIME" property="buytime" jdbcType="TIMESTAMP" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
   </resultMap>
    <select id="moneyChange" statementType="CALLABLE">
-    call USER_PKG.money_change(#{op,mode=IN,jdbcType=INTEGER},#{money,mode=IN,jdbcType=NUMERIC},#{userid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+    call USER_PKG.money_change(#{op,mode=IN,jdbcType=INTEGER},#{money,mode=IN,jdbcType=INTEGER},#{userid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
   </select>
   <select id="addBuy" statementType="CALLABLE">
-    call USER_PKG.add_buy(#{userid,mode=IN,jdbcType=VARCHAR},#{songid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+    call USER_PKG.add_buy(#{userid,mode=IN,jdbcType=VARCHAR},#{musicid,mode=IN,jdbcType=VARCHAR},#{type,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
   </select>
   <select id="getBuyRecord" parameterType="java.util.HashMap" statementType="CALLABLE">
     call USER_PKG.get_buy_record(#{userid,mode=IN,jdbcType=VARCHAR},#{buyrecord,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=BuyResultMap})
