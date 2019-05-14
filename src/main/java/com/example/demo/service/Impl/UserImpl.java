@@ -4,7 +4,9 @@ import com.example.demo.dao.AlbumMapper;
 import com.example.demo.dao.BuyMapper;
 import com.example.demo.dao.SongListMapper;
 import com.example.demo.dao.UserMapper;
+import com.example.demo.entity.Album;
 import com.example.demo.entity.BuyKey;
+import com.example.demo.entity.Song;
 import com.example.demo.entity.SongList;
 import com.example.demo.entity.User;
 import com.example.demo.entity.result.ResultEntity;
@@ -236,5 +238,23 @@ public class UserImpl implements UserService {
         mapMoney.put("userid",id);
         buyMapper.moneyChange(mapMoney);
         return mapMoney.get("succ").toString().equals("1")?new ResultEntity(true, "", true):new ResultEntity(false, "", false);
+    }
+
+    @Override
+    //获取购买的歌曲（实现）
+    public ResultEntity getBoughtSongs(String id){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid",id);
+        buyMapper.getBoughtSongs(map);
+        return new ResultEntity(true, "", (ArrayList<Song>)map.get("songs"));
+    }
+
+    @Override
+    //获取购买的专辑（实现）
+    public ResultEntity getBoughtAlbums(String id){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid",id);
+        buyMapper.getBoughtAlbums(map);
+        return new ResultEntity(true, "", (ArrayList<Album>)map.get("albums"));
     }
 }

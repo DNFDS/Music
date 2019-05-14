@@ -16,5 +16,11 @@
   <select id="getBuyRecord" parameterType="java.util.HashMap" statementType="CALLABLE">
     call USER_PKG.get_buy_record(#{userid,mode=IN,jdbcType=VARCHAR},#{buyrecord,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=BuyResultMap})
   </select>
+  <select id="getBoughtSongs" parameterType="java.util.HashMap" statementType="CALLABLE">
+    call USER_PKG.get_buy_songs(#{userid,mode=IN,jdbcType=VARCHAR},#{songs,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=SongResultMap})
+  </select>
+  <select id="getBoughtAlbums" parameterType="java.util.HashMap" statementType="CALLABLE">
+    call USER_PKG.get_buy_albums(#{userid,mode=IN,jdbcType=VARCHAR},#{albums,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=AlbumResultMap})
+  </select>
   
 </mapper>

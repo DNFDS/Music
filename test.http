@@ -60,3 +60,10 @@ get {{url}}/buyMusic?id=100000&mid=4000001&type=s
 ###
 get {{url}}/charge?id=100000&money=50
 
+###
+get {{url}}/showBoughtSongs?id=100000
+
+###
+get {{url}}/showBoughtAlbums?id=100000
+
+

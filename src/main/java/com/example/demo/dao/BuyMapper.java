@@ -23,4 +23,18 @@ public interface BuyMapper {
      * @OUT: "buyrecord"> ArrayList<Buy>
      */
     void getBuyRecord(Map<String,Object> Map);
+
+    /**
+     * @param Map
+     * @IN : "userid"
+     * @OUT: "songs" > ArrayList<Song>
+     */
+    void getBoughtSongs(Map<String,Object> Map);
+
+    /**
+     * @param Map
+     * @IN : "userid"
+     * @OUT: "albums" > ArrayList<Album>
+     */
+    void getBoughtAlbums(Map<String,Object> Map);
 }
