@@ -1,5 +1,6 @@
 package com.example.demo.userInterface;
 
+import com.example.demo.entity.Song;
 import com.example.demo.entity.SongList;
 import com.example.demo.entity.User;
 import com.example.demo.entity.result.ResultEntity;
@@ -25,6 +26,17 @@ public class SongListInterface {
     private KeepService keepService;
     @Autowired
     private AutoShowUtil showUtil;
+
+    @GetMapping(value = "/api/getSongListSavedNum")
+    public Object getSongListSavedNum(@Param("songlistid") String songlistid){
+        return songListService.getSongListSavedNum(songlistid).getObject();
+    }
+
+    @GetMapping(value = "/api/getNumOfSongList")
+    public Object getNumOfSongList(@Param("songlistid") String songlistid){
+        ArrayList<Song> songs = (ArrayList<Song>)songListService.getSongsInSongList(songlistid).getObject();
+        return songs.size();
+    }
 
     @RequestMapping(value = "/profile/like_song_songlist_typeList", method = RequestMethod.GET)
     public ModelAndView showKeepedSongList(HttpServletRequest request, HttpServletResponse response){
