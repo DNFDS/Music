@@ -12,7 +12,7 @@ public interface BuyMapper {
 
     /**
      * @param Map
-     * @IN :"userid","songid"
+     * @IN :"userid","songid","type"
      * @OUT: "succ"> String
      */
     String addBuy(Map<String,Object> Map);

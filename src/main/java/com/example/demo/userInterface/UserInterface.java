@@ -7,6 +7,7 @@ import com.example.demo.service.UserService;
 import com.example.demo.util.AutoShowUtil;
 
 import org.apache.ibatis.annotations.Param;
+import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,6 +67,21 @@ public class UserInterface {
         user.setUserid(id);
         return userService.getSongLists(user).getObject();
     }
+
+    @GetMapping(value="/api/setVIP")
+    public Object setVIP(@Param("id") String id){
+        return userService.setVIP(id).getObject();
+    }
+
+    @GetMapping(value="/api/buyMusic")
+    public Object buyMusic(@Param("id") String id,@Param("mid") String mid,@Param("type") String type){
+        return userService.buyMusic(id,mid,type).getObject();
+    }
+
+    @GetMapping(value="/api/charge")
+    public Object charge(@Param("id") String id,@Param("money") String money){
+        return userService.charge(id,money).getObject();
+    }
     
     @RequestMapping(value ="/api/Login",method = RequestMethod.POST)
     public ResultEntity Login(@RequestParam("id") String id, @RequestParam("pwd")String pwd, HttpServletRequest request){
@@ -92,18 +108,12 @@ public class UserInterface {
         return new ModelAndView("temp/fans_main",map);
     }
 
-    @RequestMapping(value = "/profile/showFollowUser", method = RequestMethod.GET)
-    public ModelAndView showFollowUser(HttpServletRequest request, HttpServletResponse response){
-        User user = (User) request.getSession(false).getAttribute("visted");
-        User my =(User) request.getSession(false).getAttribute("user");
-        String flag = request.getParameter("flag");
-        ResultEntity e = userService.getFriends(user);
-        ArrayList<User> Follows = (ArrayList<User>)e.getObject();
-        //"Follows"关注的用户 "FollowNum"关注的人数 "isFollow"是否关注
-        Map<String,Object> map = showUtil.showFollow(my.getUserid(),Follows);
-        if(flag.equals("2"))
-            return new ModelAndView("temp/follows/follow_user",map);
-        return new ModelAndView("temp/follow_main",map);
+    @GetMapping(value="/api/showFollowUser")
+    public Object showFollowUser(@Param("id") String id){
+        User u = new User();
+        u.setUserid(id);
+        ResultEntity e =userService.getFriends(u);
+        return e.getObject();
     }
 
     @ResponseBody
@@ -112,5 +122,24 @@ public class UserInterface {
         User my =(User) request.getSession(false).getAttribute("user");
         String id = request.getParameter("id");
         return showUtil.changeFollow(my.getUserid(),id);
+    }
+
+    @GetMapping(value = "/api/isFollowed")
+    public Object isFollowed(@Param("uid") String uid,@Param("fid") String fid){
+        ResultEntity e=userService.isFriendExist(uid, fid);
+        return e.getObject();
+    }
+
+    @GetMapping(value = "/api/changeFollow")
+    public String changeFollow(@Param("uid") String uid,@Param("fid") String fid){
+        ResultEntity e=userService.isFriendExist(uid, fid);
+        if ((Boolean)e.getObject()==true){
+            ResultEntity unFollow=userService.unFollowUser(uid, fid);
+            return (Boolean)unFollow.getObject()==true?"取关成功":"取关失败";
+        }
+        else{
+            ResultEntity follow=userService.followUser(uid, fid);
+            return (Boolean)follow.getObject()==true?"关注成功":"关注失败";
+        }
     }
 }

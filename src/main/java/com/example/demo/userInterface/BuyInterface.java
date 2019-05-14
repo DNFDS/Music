@@ -24,11 +24,12 @@ public class BuyInterface {
     private AutoShowUtil showUtil;
 
     @RequestMapping(value = "/profile/showMyBought", method = RequestMethod.GET)
-    public ModelAndView showMyBought(HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView showMyBught(HttpServletRequest request, HttpServletResponse response){
         User user = (User) request.getSession(false).getAttribute("visted");
         ResultEntity e = songService.getBoughtSongByUserId(user.getUserid());
         ArrayList<SongList> boughtSongList = (ArrayList<SongList>)e.getObject();
         Map<String,Object> map = showUtil.showSongList(boughtSongList);
         return new ModelAndView("temp/mybought_main",map);
     }
+
 }

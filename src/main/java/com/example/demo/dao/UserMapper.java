@@ -107,4 +107,11 @@ public interface UserMapper {
      * @OUT: "result"> String
      */
     void isFriendExist(Map<String, Object> Map);
+
+    /**
+     * @param Map
+     * @IN :"userid"
+     * @OUT: "succ"> String
+     */
+    void setVIP(Map<String, Object> Map);
 }

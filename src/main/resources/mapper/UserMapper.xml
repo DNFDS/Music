@@ -64,4 +64,7 @@
   <select id="deleteFriend" parameterType="java.util.HashMap" statementType="CALLABLE">
   call USER_PKG.DELETE_FRIEND(#{userid,jdbcType=VARCHAR,mode=IN},#{friendid,jdbcType=VARCHAR,mode=IN},#{succ,jdbcType=VARCHAR,mode=OUT})
   </select>
+  <select id="setVIP" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call USER_PKG.SET_VIP(#{userid,jdbcType=VARCHAR,mode=IN},#{succ,jdbcType=VARCHAR,mode=OUT})
+  </select>
 </mapper>
