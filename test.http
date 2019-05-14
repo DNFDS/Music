@@ -1,0 +1,30 @@
+@url = http://localhost:8081/api
+
+@json = 11
+
+###
+get {{url}}/getFans?id=100001
+
+###
+get {{url}}/getFriends?id=100001
+
+###
+get {{url}}/getFollowSinger?id=100001
+
+###
+get {{url}}/getUser?id=100001
+
+###
+get {{url}}/getSongList?id=100001
+
+###
+get {{url}}/getFavorite?id=100001
+
+###
+get {{url}}/getAlbum?albumid=1000000
+
+###
+get {{url}}/getSingerBySong?songid=4000000
+
+###
+get {{url}}/getSinger?singerid=

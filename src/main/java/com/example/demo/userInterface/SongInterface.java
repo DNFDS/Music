@@ -10,6 +10,8 @@ import com.example.demo.service.UserService;
 import com.example.demo.util.AutoShowUtil;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 public class SongInterface {
     @Autowired
@@ -31,6 +34,12 @@ public class SongInterface {
     private AutoShowUtil showUtil;
     @Autowired
     private KeepService keepService;
+
+    @GetMapping(value = "/api/getFavorite")
+    public Object getFavorite(@Param("id")String id){
+        SongList i = userService.getFavoritelist(id);
+        return songListService.getSongsInSongList(i).getObject();
+    }
 
     @RequestMapping(value = "/profile/like_song_song_typeList", method = RequestMethod.GET)
     public ModelAndView showSongsInList(HttpServletRequest request, HttpServletResponse response){
@@ -77,6 +86,8 @@ public class SongInterface {
         }
         return new ResultEntity(succ,"保存成功",null);
     }
+
+
     private void getFavoriteList(Map<String,Object> map,ArrayList<SongList> createdsonglist){
         ResultEntity e;
         for(SongList i : createdsonglist){

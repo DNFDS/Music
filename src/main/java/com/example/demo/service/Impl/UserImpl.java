@@ -1,6 +1,7 @@
 package com.example.demo.service.Impl;
 
 import com.example.demo.dao.AlbumMapper;
+import com.example.demo.dao.BuyMapper;
 import com.example.demo.dao.SongListMapper;
 import com.example.demo.dao.UserMapper;
 import com.example.demo.entity.SongList;
@@ -22,6 +23,8 @@ public class UserImpl implements UserService {
     private SongListMapper songListMapper;
     @Resource
     private AlbumMapper albumMapper;
+    @Resource
+    private BuyMapper buyMapper;
 
     @Override
     public ResultEntity SignIn(User user) {
@@ -182,4 +185,45 @@ public class UserImpl implements UserService {
         return (ArrayList<User>)map.get("users");
     }
 
+    @Override
+    //设置VIP（实现）
+    public ResultEntity setVIP(String userid){
+        Map<String,Object> mapVIP = new HashMap<>();
+        mapVIP.put("userid",userid);
+        userMapper.setVIP(mapVIP);
+        return mapVIP.get("succ").toString().equals("1")?new ResultEntity(true, "", true):new ResultEntity(false, "", false);
+    }
+
+    @Override
+    //购买音乐（实现）
+    public ResultEntity buyMusic(String userid,String musicid,String type){
+        Map<String,Object> mapMoney = new HashMap<>();
+        mapMoney.put("op",2);
+        mapMoney.put("money",type.equals("a")?15:2);
+        mapMoney.put("userid",userid);
+        buyMapper.moneyChange(mapMoney);
+        String succ=mapMoney.get("succ").toString();
+        if (succ.equals("0")){
+            return new ResultEntity(false, "", false);
+        }
+        else{
+            Map<String,Object> mapBuy = new HashMap<>();
+            mapBuy.put("userid",userid);
+            mapBuy.put("musicid",musicid);
+            mapBuy.put("type",type);
+            buyMapper.addBuy(mapBuy);
+            return mapBuy.get("succ").toString().equals("1")?new ResultEntity(true, "", true):new ResultEntity(false, "", false);
+        }
+    }
+
+    @Override
+    //充值（实现）
+    public ResultEntity charge(String id, String money){
+        Map<String,Object> mapMoney = new HashMap<>();
+        mapMoney.put("op",1);
+        mapMoney.put("money",money);
+        mapMoney.put("userid",id);
+        buyMapper.moneyChange(mapMoney);
+        return mapMoney.get("succ").toString().equals("1")?new ResultEntity(true, "", true):new ResultEntity(false, "", false);
+    }
 }

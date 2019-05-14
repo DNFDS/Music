@@ -21,4 +21,7 @@ public interface UserService {
     ResultEntity getUserById(String id);
     ResultEntity isFriendExist(String userid,String friendid);
     SongList getFavoritelist(String userid);
+    ResultEntity setVIP(String userid);
+    ResultEntity buyMusic(String userid,String musicid,String type);
+	ResultEntity charge(String id, String money);
 }
