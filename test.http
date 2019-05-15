@@ -40,6 +40,12 @@ get {{url}}/getSinger?singerid=
 ###
 get {{url}}/getAlbum?albumid=1000000
 
+###
+get {{url}}/isFollowedSinger?uid=100001&sid=200000
+
+###
+get {{url}}/changeFollowSinger?uid=100001&sid=200000
+
 #################### about friend
 ###
 get {{url}}/showFollowUser?id=100000

@@ -10,6 +10,7 @@ import com.example.demo.entity.Song;
 import com.example.demo.entity.SongList;
 import com.example.demo.entity.User;
 import com.example.demo.entity.result.ResultEntity;
+import com.example.demo.service.SingerService;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,8 @@ public class UserImpl implements UserService {
     private AlbumMapper albumMapper;
     @Resource
     private BuyMapper buyMapper;
+    @Resource
+    private SingerService singerService;
 
     @Override
     public ResultEntity SignIn(User user) {
@@ -257,4 +260,5 @@ public class UserImpl implements UserService {
         buyMapper.getBoughtAlbums(map);
         return new ResultEntity(true, "", (ArrayList<Album>)map.get("albums"));
     }
+
 }
