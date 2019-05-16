@@ -1,26 +1,19 @@
 package com.example.demo.userInterface;
 
-import com.example.demo.entity.Song;
-import com.example.demo.entity.SongList;
-import com.example.demo.entity.User;
+import com.example.demo.entity.*;
 import com.example.demo.entity.result.ResultEntity;
-import com.example.demo.service.KeepService;
-import com.example.demo.service.SongListService;
-import com.example.demo.service.UserService;
+import com.example.demo.service.*;
 import com.example.demo.util.AutoShowUtil;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
@@ -34,11 +27,41 @@ public class SongInterface {
     private AutoShowUtil showUtil;
     @Autowired
     private KeepService keepService;
-
+    @Autowired
+    private SongService songService;
+    @Autowired
+    private AlbumService albumService;
     @GetMapping(value = "/api/getFavorite")
     public Object getFavorite(@Param("id")String id){
         SongList i = userService.getFavoritelist(id);
         return songListService.getSongsInSongList(i).getObject();
+    }
+    @RequestMapping(value="/api/commentSong", method = RequestMethod.POST)
+    public boolean commentSong(@RequestParam("songID") String songID, @RequestParam("userID") String userID,
+                               @RequestParam("commentText") String commentText, HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        System.out.println(commentText);
+        return songService.commentSong(commentText,songID,userID);
+    }
+    @RequestMapping(value="/api/getSongInfo", method = RequestMethod.GET)
+    public Map<String, Object> getSongInfoBySongID(@RequestParam("songId") String songID){
+        Song song = songService.getSongById(songID);
+        ArrayList<comments> comments = songService.getCommentsInSong(songID);
+        Album album = albumService.getAlbumByAlbumId(song.getAlbumid());
+        List<String> commentUsers = new ArrayList<>();
+        for(int i=0; i<comments.size(); i++){
+            String userID = comments.get(i).getUserid();
+            ResultEntity re = userService.getUserById(userID);
+            User u = (User)re.getObject();
+            commentUsers.add(u.getUsername());
+        }
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("songInfo", song);
+        map.put("commentsList", comments);
+        map.put("albumName", album.getAlbumname());
+        map.put("albumIssueTime",album.getAlbumage());
+        map.put("commentUsers", commentUsers);
+        return map;
     }
 
     @RequestMapping(value = "/profile/like_song_song_typeList", method = RequestMethod.GET)

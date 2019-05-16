@@ -37,16 +37,11 @@
             <scope>true</scope>
         </dependency>
 
-        <!-- <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency> -->
-
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc8</artifactId>
-            <version>12.1.0.2.0</version>
+            <version>10.2.0.4.0</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
