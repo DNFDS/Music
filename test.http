@@ -2,6 +2,7 @@
 
 @json = 11
 
+################## about user
 ###
 get {{url}}/getFans?id=100001
 
@@ -14,6 +15,7 @@ get {{url}}/getFollowSinger?id=100001
 ###
 get {{url}}/getUser?id=100001
 
+################### about songlist
 ###
 get {{url}}/getSongList?id=100001
 
@@ -21,12 +23,55 @@ get {{url}}/getSongList?id=100001
 get {{url}}/getFavorite?id=100001
 
 ###
-get {{url}}/getAlbum?albumid=1000000
+get {{url}}//getSongListSavedNum?songlistid=3000508
 
+###
+get {{url}}//getNumOfSongList?songlistid=3000508
+
+
+
+#################### about singer
 ###
 get {{url}}/getSingerBySong?songid=4000000
 
 ###
 get {{url}}/getSinger?singerid=
 
+###
 get{{url}}/getSongInfo?songid=4000005
+
+get {{url}}/getAlbum?albumid=1000000
+
+###
+get {{url}}/isFollowedSinger?uid=100001&sid=200000
+
+###
+get {{url}}/changeFollowSinger?uid=100001&sid=200000
+
+#################### about friend
+###
+get {{url}}/showFollowUser?id=100000
+
+###
+get {{url}}/isFollowed?uid=100000&fid=100001
+
+###
+get {{url}}/changeFollow?uid=100000&fid=100001
+
+#################### about buy
+###
+get {{url}}/setVIP?id=100000
+
+###
+get {{url}}/buyMusic?id=100000&mid=4000001&type=s
+
+###
+get {{url}}/charge?id=100000&money=50
+
+###
+get {{url}}/showBoughtSongs?id=100000
+
+###
+get {{url}}/showBoughtAlbums?id=100000
+
+

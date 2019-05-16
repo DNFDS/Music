@@ -1,5 +1,6 @@
 package com.example.demo.userInterface;
 
+import com.example.demo.entity.Singer;
 import com.example.demo.entity.User;
 import com.example.demo.entity.result.ResultEntity;
 import com.example.demo.service.SingerService;
@@ -140,6 +141,34 @@ public class UserInterface {
         else{
             ResultEntity follow=userService.followUser(uid, fid);
             return (Boolean)follow.getObject()==true?"关注成功":"关注失败";
+        }
+    }
+
+    @GetMapping(value="/api/isFollowedSinger")
+    public Object isFollowedSinger(@Param("uid") String uid,@Param("sid") String sid){
+        ArrayList<Singer> s=singerService.getSingerUserLike(uid);
+        for (int i=0;i<s.size();i++){
+            if(s.get(i).getSingerid().equals(sid)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @GetMapping(value="/api/changeFollowSinger")
+    public Object changeFollowSinger(@Param("uid") String uid,@Param("sid") String sid){
+        Boolean isFollowed=false;
+        ArrayList<Singer> s=singerService.getSingerUserLike(uid);
+        for (int i=0;i<s.size();i++){
+            if(s.get(i).getSingerid().equals(sid)){
+                isFollowed=true;
+            }
+        }
+        if(isFollowed==false){
+            return (Boolean)singerService.followSinger(uid, sid)==true?"关注成功":"关注失败";
+        }
+        else{
+            return (Boolean)singerService.unfollowSinger(uid, sid)==true?"取关成功":"取关失败";
         }
     }
 }

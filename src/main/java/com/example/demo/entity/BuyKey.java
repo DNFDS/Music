@@ -1,16 +1,16 @@
 package com.example.demo.entity;
 
 public class BuyKey {
-    private String songid;
+    private String musicid;
 
     private String userid;
 
-    public String getSongid() {
-        return songid;
+    public String getMusicid() {
+        return musicid;
     }
 
-    public void setSongid(String songid) {
-        this.songid = songid == null ? null : songid.trim();
+    public void setMusicid(String musicid) {
+        this.musicid = musicid == null ? null : musicid.trim();
     }
 
     public String getUserid() {

@@ -23,5 +23,7 @@ public interface UserService {
     SongList getFavoritelist(String userid);
     ResultEntity setVIP(String userid);
     ResultEntity buyMusic(String userid,String musicid,String type);
-	ResultEntity charge(String id, String money);
+    ResultEntity charge(String id, String money);
+    ResultEntity getBoughtSongs(String id);
+    ResultEntity getBoughtAlbums(String id);
 }

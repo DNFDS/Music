@@ -39,9 +39,9 @@ public class SongListImpl implements SongListService {
         return songList;
     }
     @Override
-    public ResultEntity getSongsInSongList(SongList list){
+    public ResultEntity getSongsInSongList(String songlistid){
         Map<String,Object> map = new HashMap<>();
-        map.put("songlistid",list.getSonglistid());
+        map.put("songlistid",songlistid);
         songListMapper.getSongsInSongList(map);
         ArrayList<Song> songs = (ArrayList<Song>)map.get("songs");
         return new ResultEntity(true,"",songs);
@@ -83,9 +83,9 @@ public class SongListImpl implements SongListService {
     }
 
     @Override
-    public ResultEntity getSongListSavedNum(SongList list){
+    public ResultEntity getSongListSavedNum(String  songlistid){
         Map<String,Object> map = new HashMap<>();
-        map.put("songlistid",list.getSonglistid());
+        map.put("songlistid",songlistid);
         songListMapper.getSongListSavedNum(map);
         int num = (int)map.get("savednum");
         return new ResultEntity(true,"",num);

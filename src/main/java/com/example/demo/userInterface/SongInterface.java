@@ -34,7 +34,7 @@ public class SongInterface {
     @GetMapping(value = "/api/getFavorite")
     public Object getFavorite(@Param("id")String id){
         SongList i = userService.getFavoritelist(id);
-        return songListService.getSongsInSongList(i).getObject();
+        return songListService.getSongsInSongList(i.getSonglistid()).getObject();
     }
     @RequestMapping(value="/api/commentSong", method = RequestMethod.POST)
     public boolean commentSong(@RequestParam("songID") String songID, @RequestParam("userID") String userID,

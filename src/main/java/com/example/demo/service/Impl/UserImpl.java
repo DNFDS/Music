@@ -4,9 +4,13 @@ import com.example.demo.dao.AlbumMapper;
 import com.example.demo.dao.BuyMapper;
 import com.example.demo.dao.SongListMapper;
 import com.example.demo.dao.UserMapper;
+import com.example.demo.entity.Album;
+import com.example.demo.entity.BuyKey;
+import com.example.demo.entity.Song;
 import com.example.demo.entity.SongList;
 import com.example.demo.entity.User;
 import com.example.demo.entity.result.ResultEntity;
+import com.example.demo.service.SingerService;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,8 @@ public class UserImpl implements UserService {
     private AlbumMapper albumMapper;
     @Resource
     private BuyMapper buyMapper;
+    @Resource
+    private SingerService singerService;
 
     @Override
     public ResultEntity SignIn(User user) {
@@ -197,6 +203,16 @@ public class UserImpl implements UserService {
     @Override
     //购买音乐（实现）
     public ResultEntity buyMusic(String userid,String musicid,String type){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid",userid);
+        map.put("musicid",musicid);
+        buyMapper.getBuyRecord(map);
+        ArrayList<BuyKey> b=(ArrayList<BuyKey>)map.get("buyrecord");
+        for(int i=0;i<b.size();i++){
+            if(b.get(i).getUserid().equals(userid)&&b.get(i).getMusicid().equals(musicid)){
+                return new ResultEntity(false, "", "已购买过");
+            }
+        }
         Map<String,Object> mapMoney = new HashMap<>();
         mapMoney.put("op",2);
         mapMoney.put("money",type.equals("a")?15:2);
@@ -226,4 +242,23 @@ public class UserImpl implements UserService {
         buyMapper.moneyChange(mapMoney);
         return mapMoney.get("succ").toString().equals("1")?new ResultEntity(true, "", true):new ResultEntity(false, "", false);
     }
+
+    @Override
+    //获取购买的歌曲（实现）
+    public ResultEntity getBoughtSongs(String id){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid",id);
+        buyMapper.getBoughtSongs(map);
+        return new ResultEntity(true, "", (ArrayList<Song>)map.get("songs"));
+    }
+
+    @Override
+    //获取购买的专辑（实现）
+    public ResultEntity getBoughtAlbums(String id){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid",id);
+        buyMapper.getBoughtAlbums(map);
+        return new ResultEntity(true, "", (ArrayList<Album>)map.get("albums"));
+    }
+
 }

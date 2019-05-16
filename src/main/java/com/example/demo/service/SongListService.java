@@ -16,8 +16,8 @@ public interface SongListService {
     boolean deleteSongInList(String songid,String songlistid);
     String changeSongListName(String name,String songlistid);
     ArrayList<SongList> getSongListByNamePart(String name);
-    ResultEntity getSongsInSongList(SongList list);
-    ResultEntity getSongListSavedNum(SongList list);
+    ResultEntity getSongsInSongList(String songlistid);
+    ResultEntity getSongListSavedNum(String songlistid);
     ResultEntity getSingerInSongList(ArrayList<Song> songs);
     ResultEntity getAlbumsInSongList(ArrayList<Song> songs);
 }
