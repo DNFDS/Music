@@ -6,6 +6,7 @@ import com.example.demo.entity.result.ResultEntity;
 import com.example.demo.service.*;
 import com.example.demo.util.AutoShowUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+@EnableAutoConfiguration
 public class DetailController {
 
     @Autowired
@@ -31,24 +34,18 @@ public class DetailController {
     private AutoShowUtil showUtil;
     @Autowired
     private SingerService singerService;
+    @Autowired
+    private PlayerService playerService;
 
     @RequestMapping(value ="/Song",method = RequestMethod.GET)
     public String songDetail(@RequestParam("songid") String songid, Map<String, Object> map,HttpServletRequest request){
         Song song = songService.getSongById(songid);
-        ResultEntity e = songService.getSingersInSong(songid);
-        ArrayList<Singer> singers = (ArrayList<Singer>)e.getObject();
         ArrayList<comments> comments = songService.getCommentsInSong(songid);
-        ArrayList<User> users = new ArrayList<>();
-        for(com.example.demo.entity.comments comment:comments){
-            e = userService.getUserById(comment.getUserid());
-            users.add((User) e.getObject());
-        }
         Album album = albumService.getAlbumByAlbumId(song.getAlbumid());
         map.put("song",song);
-        map.put("singers",singers);
+        //map.put("singers",singers);
         map.put("album",album);
         map.put("comments",comments);
-        map.put("commentsUser",users);
         return "Details/song_detail";
     }
     @RequestMapping(value ="/SongList",method = RequestMethod.GET)

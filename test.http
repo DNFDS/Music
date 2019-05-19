@@ -38,6 +38,8 @@ get {{url}}/getSingerBySong?songid=4000000
 get {{url}}/getSinger?singerid=
 
 ###
+get{{url}}/getSongInfo?songid=4000005
+
 get {{url}}/getAlbum?albumid=1000000
 
 ###
