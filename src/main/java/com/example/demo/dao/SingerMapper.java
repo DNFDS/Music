@@ -65,4 +65,5 @@ public interface SingerMapper {
      * @OUT: "singers"> ArrayList<Singer>
      */
     void getSingerUserLike(Map<String,Object> Map);
+
 }

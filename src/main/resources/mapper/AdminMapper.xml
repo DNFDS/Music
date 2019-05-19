@@ -1,17 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.dao.AdminMapper">
-  <resultMap id="AdminResultMap" type="com.example.demo.entity.Admin">
-    <id column="ADMINID" jdbcType="VARCHAR" property="adminid" />
-    <result column="ADMINNAME" jdbcType="VARCHAR" property="adminname" />
-    <result column="ADMINPASSWORD" jdbcType="VARCHAR" property="adminpassword" />
-    <result column="ADMINIMAGE" jdbcType="VARCHAR" property="adminimage" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Admin" >
+    <id column="ADMINID" property="adminid" jdbcType="VARCHAR" />
+    <result column="ADMINPASSWORD" property="adminpassword" jdbcType="VARCHAR" />
   </resultMap>
-
-    <select id="isAdminExit" parameterType="java.util.Map" resultType="java.util.Map" statementType="CALLABLE">
-        call ADMIN_PKG.IS_ADMIN_EXIST(#{adminid,jdbcType=VARCHAR,mode=IN},#{adminpassword,jdbcType=VARCHAR,mode=IN},#{result,jdbcType=VARCHAR,mode=OUT})
-    </select>
-    <select id="getAdminById" parameterType="java.util.HashMap" statementType="CALLABLE">
-        call ADMIN_PKG.get_admin(#{adminid,mode=IN,jdbcType=VARCHAR},#{admin,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=	AdminResultMap})
-    </select>
+  <select id="isAdminExist" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.is_admin_exist(#{id,mode=IN,jdbcType=VARCHAR},#{pwd,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="addSong" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.add_song(#{songid,mode=IN,jdbcType=VARCHAR},#{songname,mode=IN,jdbcType=VARCHAR},#{length,mode=IN,jdbcType=VARCHAR},#{school,mode=IN,jdbcType=VARCHAR},#{language,mode=IN,jdbcType=VARCHAR},#{age,mode=IN,jdbcType=VARCHAR},#{company,mode=IN,jdbcType=VARCHAR},#{adminid,mode=IN,jdbcType=VARCHAR},#{albumid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="addAlbum" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.add_album(#{albumid,mode=IN,jdbcType=VARCHAR},#{albumname,mode=IN,jdbcType=VARCHAR},#{albumage,mode=IN,jdbcType=VARCHAR},#{language,mode=IN,jdbcType=VARCHAR},#{company,mode=IN,jdbcType=VARCHAR},#{adminid,mode=IN,jdbcType=VARCHAR},#{singerid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="addSinger" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.add_singer(#{singerid,mode=IN,jdbcType=VARCHAR},#{singername,mode=IN,jdbcType=VARCHAR},#{region,mode=IN,jdbcType=VARCHAR},#{sex,mode=IN,jdbcType=VARCHAR},#{intro,mode=IN,jdbcType=VARCHAR},#{adminid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="deleteSong" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.delete_song(#{songid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="deleteAlbum" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.delete_album(#{albumid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="deleteSinger" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.delete_singer(#{singerid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="getMaxSongid" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_max_songid(#{songid,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="getMaxAlbumid" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_max_albumid(#{albumid,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="getMaxSingerid" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_max_singerid(#{singerid,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="getSongBySASName" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_song_by_sas_name(#{singername,mode=IN,jdbcType=VARCHAR},#{albumname,mode=IN,jdbcType=VARCHAR},#{songname,mode=IN,jdbcType=VARCHAR},#{song,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=SongResultMap})
+  </select>
+  <select id="getAlbumidBySAName" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_albumid_by_sa_name(#{singername,mode=IN,jdbcType=VARCHAR},#{albumname,mode=IN,jdbcType=VARCHAR},#{albumid,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="getAlbumBySAName" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_album_by_sa_name(#{singername,mode=IN,jdbcType=VARCHAR},#{albumname,mode=IN,jdbcType=VARCHAR},#{album,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=AlbumResultMap})
+  </select>
 </mapper>

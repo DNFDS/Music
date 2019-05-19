@@ -9,6 +9,7 @@
     <result column="ALBUMAGE" jdbcType="VARCHAR" property="albumage" />
     <result column="LANGUAGE" jdbcType="VARCHAR" property="language" />
     <result column="COMPANY" jdbcType="VARCHAR" property="company" />
+    <result column="ADMINID" property="adminid" jdbcType="VARCHAR" />
   </resultMap>
   
   <select id="getAlbumById" parameterType="java.util.HashMap" statementType="CALLABLE">

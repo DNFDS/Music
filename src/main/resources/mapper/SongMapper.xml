@@ -13,6 +13,7 @@
     <result column="ALBUMID" property="albumid" jdbcType="VARCHAR" />
     <result column="SONGSCHOOL" property="songschool" jdbcType="VARCHAR" />
     <result column="SONGAGE" property="songage" jdbcType="VARCHAR" />
+    <result column="ADMINID" property="adminid" jdbcType="VARCHAR" />
   </resultMap>
   <select id="getSongById" parameterType="java.util.HashMap" statementType="CALLABLE">
     call SONG_PKG.search_song_by_song_id(#{songid,mode=IN,jdbcType=VARCHAR},#{songs,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=SongResultMap})

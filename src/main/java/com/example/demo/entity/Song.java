@@ -27,6 +27,16 @@ public class Song {
 
     private BigDecimal savenum;
 
+    private String adminid;
+
+    public String getAdminid(){
+        return adminid;
+    }
+
+    public void setAdminid(String adminid){
+        this.adminid = adminid == null ? null : adminid.trim();
+    }
+
     public String getSongid() {
         return songid;
     }

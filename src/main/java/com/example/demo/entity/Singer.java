@@ -13,6 +13,16 @@ public class Singer {
 
     private String introduction;
 
+    private String adminid;
+
+    public String getAdminid(){
+        return adminid;
+    }
+
+    public void setAdminid(String adminid){
+        this.adminid = adminid == null ? null : adminid.trim();
+    }
+
     public String getSingerid() {
         return singerid;
     }

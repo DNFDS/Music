@@ -15,6 +15,16 @@ public class Album {
 
     private String company;
 
+    private String adminid;
+
+    public String getAdminid(){
+        return adminid;
+    }
+
+    public void setAdminid(String adminid){
+        this.adminid = adminid == null ? null : adminid.trim();
+    }
+
     public String getAlbumid() {
         return albumid;
     }

@@ -8,6 +8,7 @@
     <result column="SINGERSEX" property="singersex" jdbcType="VARCHAR" />
     <result column="REGION" property="region" jdbcType="VARCHAR" />
     <result column="INTRODUCTION" property="introduction" jdbcType="VARCHAR" />
+    <result column="ADMINID" property="adminid" jdbcType="VARCHAR" />
   </resultMap>
   <select id="getSingerById" parameterType="java.util.HashMap" statementType="CALLABLE">
     call SINGER_PKG.search_singer_by_id(#{singerid,mode=IN,jdbcType=VARCHAR},#{singers,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=SingerResultMap})
