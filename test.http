@@ -74,4 +74,16 @@ get {{url}}/showBoughtSongs?id=100000
 ###
 get {{url}}/showBoughtAlbums?id=100000
 
+#################### about search
 
+###
+get {{url}}/Search/Song?words=七
+
+###
+get {{url}}/Search/SongList?words=啊
+
+###
+get {{url}}/Search/Album?words=爱
+
+###
+get {{url}}/Search/User?words=l
