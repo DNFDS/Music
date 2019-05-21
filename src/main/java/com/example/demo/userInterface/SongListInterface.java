@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 public class SongListInterface {
     @Autowired
@@ -39,6 +40,30 @@ public class SongListInterface {
         return songs.size();
     }
 
+    @GetMapping(value = "/api/showCreatedSongList")
+    public Object showCreatedSongList(@Param("id") String id){
+        //如果请求的form页面，就直接返回
+        //list页面，要额外添加歌单的收藏数和曲目数
+        return userService.getCreatedSongList(id);
+    }
+
+    @GetMapping(value = "/api/KeepSongList")
+    public ResultEntity KeepSongList(@Param("userid")String userid, @Param("songlistid")String songlistid){
+        String result = keepService.KeepSongList(songlistid,userid);
+        boolean succ = true;
+        if(result.equals("0")){
+            succ = false;
+            return new ResultEntity(succ,"歌单已收藏",null);
+        }
+        return new ResultEntity(succ,"收藏成功",null);
+    }
+
+    @GetMapping(value = "/api/createNewSonglist")
+    public String createNewSonglist(@Param("name")String name, @Param("userid") String userid) {
+        String id = songListService.createNewSongList(name,null,null,userid);
+        return "您新创建的歌单id为: "+id;
+    }
+
     @RequestMapping(value = "/profile/like_song_songlist_typeList", method = RequestMethod.GET)
     public ModelAndView showKeepedSongList(HttpServletRequest request, HttpServletResponse response){
         User user = (User) request.getSession(false).getAttribute("visted");
@@ -53,36 +78,6 @@ public class SongListInterface {
         if(flag.equals("2"))
             return new ModelAndView("temp/mylike/songlist_form_details",map);
         return new ModelAndView("temp/mylike/songlist_list_details",map);
-    }
-
-    @RequestMapping(value = "/profile/showCreatedSongList", method = RequestMethod.GET)
-    public ModelAndView showCreatedSongList(HttpServletRequest request, HttpServletResponse response){
-        User user = (User) request.getSession(false).getAttribute("visted");
-        //如果请求的form页面，就直接返回
-        //list页面，要额外添加歌单的收藏数和曲目数
-        ArrayList<SongList>CreatedSongList = userService.getCreatedSongList(user.getUserid());
-        //得到所有歌单的曲目数和收藏数创建人  songnum  savenum username
-        Map<String,Object>map = showUtil.showSongList(CreatedSongList);
-        return new ModelAndView("temp/created_main",map);
-    }
-
-    @RequestMapping(value = "/KeepSongList",method = RequestMethod.POST)
-    public ResultEntity KeepSongList(@Param("songlistid")String songlistid, HttpServletRequest request){
-        User user = (User) request.getSession(false).getAttribute("user");
-        String result = keepService.KeepSongList(songlistid,user.getUserid());
-        boolean succ = true;
-        if(result.equals("0")){
-            succ = false;
-            return new ResultEntity(succ,"歌单已收藏",null);
-        }
-        return new ResultEntity(succ,"收藏成功",null);
-    }
-
-    @RequestMapping(value = "/createNewSonglist",method = RequestMethod.POST)
-    public ResultEntity createNewSonglist(@Param("name")String name, @Param("isprivate")String isprivate,@Param("image")String image, HttpServletRequest request) {
-        User user = (User) request.getSession(false).getAttribute("user");
-        String id = songListService.createNewSongList(name,image,isprivate,user.getUserid());
-        return new ResultEntity(true,"您新创建的歌单id为: "+id,null);
     }
 
     @RequestMapping(value = "/getMySongList", method = RequestMethod.GET)
