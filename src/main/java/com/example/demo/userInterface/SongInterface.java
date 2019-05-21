@@ -36,6 +36,34 @@ public class SongInterface {
         SongList i = userService.getFavoritelist(id);
         return songListService.getSongsInSongList(i.getSonglistid()).getObject();
     }
+
+    @GetMapping(value = "/api/favoriteSong")
+    public ResultEntity favoriteSong(@Param("songid")String songid, @Param("userid")String userid){
+        SongList favorite = userService.getFavoritelist(userid);
+        boolean succ = true;
+        if(favorite == null){
+            succ = false;
+            return new ResultEntity(succ,"用户默认歌单不存在",null);
+        }
+        String result = keepService.KeepSong(songid,favorite.getSonglistid());
+        if(result.equals("0")){
+            succ = false;
+            return new ResultEntity(succ,"保存失败,歌曲已存在",null);
+        }
+        return new ResultEntity(succ,"喜欢成功",null);
+    }
+
+    @GetMapping(value = "/api/KeepSong")
+    public ResultEntity KeepSong(@Param("songlistid")String songlistid, @Param("songid")String songid){
+        String result = keepService.KeepSong(songid,songlistid);
+        boolean succ = true;
+        if(result.equals("0")){
+            succ = false;
+            return new ResultEntity(succ,"保存失败,歌曲已存在",null);
+        }
+        return new ResultEntity(succ,"保存成功",null);
+    }
+
     @RequestMapping(value="/api/commentSong", method = RequestMethod.POST)
     public boolean commentSong(@RequestParam("songID") String songID, @RequestParam("userID") String userID,
                                @RequestParam("commentText") String commentText, HttpServletResponse response){
@@ -81,33 +109,6 @@ public class SongInterface {
         if(flag.equals("2"))
             return new ModelAndView("temp/mylike/song_list_details",map);
         return new ModelAndView("temp/mylike_main",map);
-    }
-    @RequestMapping(value = "/favoriteSong",method = RequestMethod.POST)
-    public ResultEntity favoriteSong(@Param("songid")String songid, HttpServletRequest request){
-        User user = (User) request.getSession(false).getAttribute("user");
-        SongList favorite = userService.getFavoritelist(user.getUserid());
-        boolean succ = true;
-        if(favorite == null){
-            succ = false;
-            return new ResultEntity(succ,"用户默认歌单不存在",null);
-        }
-        String result = keepService.KeepSong(songid,favorite.getSonglistid());
-        if(result.equals("0")){
-            succ = false;
-            return new ResultEntity(succ,"保存失败,歌曲已存在",null);
-        }
-        return new ResultEntity(succ,"喜欢成功",null);
-    }
-    @RequestMapping(value = "/KeepSong",method = RequestMethod.POST)
-    public ResultEntity KeepSong(@Param("songlistid")String songlistid, @Param("songid")String songid,
-                                 HttpServletRequest request){
-        String result = keepService.KeepSong(songid,songlistid);
-        boolean succ = true;
-        if(result.equals("0")){
-            succ = false;
-            return new ResultEntity(succ,"保存失败,歌曲已存在",null);
-        }
-        return new ResultEntity(succ,"保存成功",null);
     }
 
 

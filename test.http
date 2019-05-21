@@ -20,13 +20,20 @@ get {{url}}/getUser?id=100001
 get {{url}}/getSongList?id=100001
 
 ###
+get {{url}}/showCreatedSongList?id=100001
+
+###
 get {{url}}/getFavorite?id=100001
 
 ###
-get {{url}}//getSongListSavedNum?songlistid=3000508
+get {{url}}/getSongListSavedNum?songlistid=3000508
 
 ###
-get {{url}}//getNumOfSongList?songlistid=3000508
+get {{url}}/getNumOfSongList?songlistid=3000508
+
+
+###
+get {{url}}/createNewSonglist?name=新歌单&userid=100050
 
 
 
@@ -40,6 +47,7 @@ get {{url}}/getSinger?singerid=
 ###
 get{{url}}/getSongInfo?songid=4000005
 
+###
 get {{url}}/getAlbum?albumid=1000000
 
 ###
@@ -87,3 +95,12 @@ get {{url}}/Search/Album?words=爱
 
 ###
 get {{url}}/Search/User?words=l
+
+
+#################### about song
+
+###
+get {{url}}/favoriteSong?userid=100001&songid=4000000
+
+###
+get {{url}}/KeepSong?songlistid=1555555&songid=4000000
