@@ -26,4 +26,5 @@ public interface UserService {
     ResultEntity charge(String id, String money);
     ResultEntity getBoughtSongs(String id);
     ResultEntity getBoughtAlbums(String id);
+    Object isUserBanned(String uid);
 }

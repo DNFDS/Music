@@ -14,7 +14,7 @@ public interface UserMapper {
     /**
      * @param Map
      * @IN :"userid"
-     * @OUT: "banddetail"> ArrayList<Ban>
+     * @OUT: "isbanned"> String
      */
     void isUserBanned(Map<String, Object> Map);
 

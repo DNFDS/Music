@@ -3,15 +3,15 @@ package com.example.demo.entity;
 import java.util.Date;
 
 public class Ban extends BanKey {
-    private Date bantime;
+    private String bantime;
 
     private String banreason;
 
-    public Date getBantime() {
+    public String getBantime() {
         return bantime;
     }
 
-    public void setBantime(Date bantime) {
+    public void setBantime(String bantime) {
         this.bantime = bantime;
     }
 

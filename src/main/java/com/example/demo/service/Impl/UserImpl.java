@@ -261,4 +261,11 @@ public class UserImpl implements UserService {
         return new ResultEntity(true, "", (ArrayList<Album>)map.get("albums"));
     }
 
+    @Override
+    public Object isUserBanned(String uid){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid",uid);
+        userMapper.isUserBanned(map);
+        return map.get("isbanned");
+    }
 }

@@ -4,7 +4,7 @@
   <resultMap id="BanResultMap" type="com.example.demo.entity.Ban" >
     <id column="USERID" property="userid" jdbcType="VARCHAR" />
     <id column="ADMINID" property="adminid" jdbcType="VARCHAR" />
-    <result column="BANTIME" property="bantime" jdbcType="TIMESTAMP" />
+    <result column="BANTIME" property="bantime" jdbcType="VARCHAR" />
     <result column="BANREASON" property="banreason" jdbcType="VARCHAR" />
   </resultMap>
 
