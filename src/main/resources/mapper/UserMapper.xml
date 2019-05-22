@@ -10,6 +10,7 @@
     <result column="ISVIP" property="isvip" jdbcType="CHAR" />
     <result column="USERBALANCE" property="userbalance" jdbcType="NUMERIC" />
     <result column="ISBANNED" property="isbanned" jdbcType="CHAR" />
+    <result column="COUNT" property="count" jdbcType="INTEGER" />
   </resultMap>
 
   <parameterMap type="java.util.Map" id="addUserMap">
@@ -26,7 +27,7 @@
     call USER_PKG.IS_USER_EXIST(#{userid,jdbcType=VARCHAR,mode=IN},#{userpassword,jdbcType=VARCHAR,mode=IN},#{result,jdbcType=VARCHAR,mode=OUT})
   </select>
   <select id="isUserBanned" parameterType="java.util.HashMap" statementType="CALLABLE">
-    call USER_PKG.IS_USER_BANNED(#{userid,jdbcType=VARCHAR,mode=IN},#{banddetail,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=BanResultMap})
+    call USER_PKG.IS_USER_BANNED(#{userid,jdbcType=VARCHAR,mode=IN},#{isbanned,mode=OUT,jdbcType=VARCHAR})
   </select>
   <select id="getUserById" parameterType="java.util.HashMap" statementType="CALLABLE">
     call USER_PKG.GET_USER(#{userid,mode=IN,jdbcType=VARCHAR},#{result,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=UserResultMap})

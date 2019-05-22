@@ -7,7 +7,7 @@ public class commentsKey {
 
     private String songid;
 
-    private Date commenttime;
+    private String commenttime;
 
     public String getUserid() {
         return userid;
@@ -25,11 +25,11 @@ public class commentsKey {
         this.songid = songid == null ? null : songid.trim();
     }
 
-    public Date getCommenttime() {
+    public String getCommenttime() {
         return commenttime;
     }
 
-    public void setCommenttime(Date commenttime) {
+    public void setCommenttime(String commenttime) {
         this.commenttime = commenttime;
     }
 }

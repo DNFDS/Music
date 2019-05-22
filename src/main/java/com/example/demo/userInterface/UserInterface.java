@@ -170,4 +170,9 @@ public class UserInterface {
             return (Boolean)singerService.unfollowSinger(uid, sid)==true?"取关成功":"取关失败";
         }
     }
+
+    @GetMapping(value="/api/isUserBanned")
+    public Object isUserBanned(@Param("uid") String uid){
+        return userService.isUserBanned(uid);
+    }
 }

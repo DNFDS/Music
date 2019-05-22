@@ -4,8 +4,9 @@
   <resultMap id="commentsResultMap" type="com.example.demo.entity.comments" >
     <id column="USERID" property="userid" jdbcType="VARCHAR" />
     <id column="SONGID" property="songid" jdbcType="VARCHAR" />
-    <id column="COMMENTTIME" property="commenttime" jdbcType="TIMESTAMP" />
+    <id column="COMMENTTIME" property="commenttime" jdbcType="CHAR" />
     <result column="COMMENTTEXT" property="commenttext" jdbcType="VARCHAR" />
+    <result column="READ" property="read" jdbcType="VARCHAR" />
   </resultMap>
 
   <select id="addComment" statementType="CALLABLE">

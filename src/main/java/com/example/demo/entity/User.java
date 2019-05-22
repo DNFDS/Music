@@ -19,6 +19,16 @@ public class User {
 
     private String isbanned;
 
+    private int count;
+
+    public int getCount(){
+        return count;
+    }
+
+    public void setCount(int count){
+        this.count=count;
+    }
+
     public String getUserid() {
         return userid;
     }

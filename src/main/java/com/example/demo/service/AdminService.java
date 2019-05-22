@@ -3,7 +3,9 @@ package com.example.demo.service;
 import com.example.demo.entity.Album;
 import com.example.demo.entity.Singer;
 import com.example.demo.entity.Song;
+import com.example.demo.entity.comments;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public interface AdminService {
@@ -38,6 +40,23 @@ public interface AdminService {
 
 	Object deleteSinger(String singerid);
 
-	
+	String banUser(String adminid);
+
+	ArrayList<comments> getNewComments(int pgnum);
+
+	int getNewCommentsTotal();
+
+	Object passComment(String uid, String sid, String ctime);
+
+	Object failComment(String uid, String sid, String ctime);
+
+	int getBanTotal();
+
+	Object getBan(int pgnum);
+
+	Object unBan(String uid);
+
+	String[] getBasicInfo(String aid);
+
 }
 

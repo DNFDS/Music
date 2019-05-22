@@ -7,11 +7,14 @@ import com.example.demo.dao.SongMapper;
 import com.example.demo.entity.Album;
 import com.example.demo.entity.Singer;
 import com.example.demo.entity.Song;
+import com.example.demo.entity.comments;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.AlbumService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -171,6 +174,100 @@ public class AdminImpl implements AdminService {
         map.put("singerid",singerid);
         adminMapper.deleteSinger(map);
         return map.get("succ");
+    }
+
+    @Override
+    public String banUser(String adminid){
+        Map<String,Object> map = new HashMap<>();
+        map.put("adminid",adminid);
+        adminMapper.banUser(map);
+        String s="";
+        ArrayList<String> banids=(ArrayList<String>)map.get("banids");
+        if(banids.size()==0){
+            return s;
+        }
+        else{
+            for (int i=0;i<((ArrayList<String>)map.get("banids")).size();i++){
+                map.put("userid",((ArrayList<String>)map.get("banids")).get(i));
+                s+=((ArrayList<String>)map.get("banids")).get(i);
+                adminMapper.banSingleUser(map);
+                if(((String)map.get("succ")).equals("1")){
+                    s+="封禁成功 ";
+                }
+                else{
+                    s+="封禁失败 ";
+                }
+                map.remove("succ");
+                map.remove("userid");
+            }
+        }
+        return s;
+    }
+
+    @Override
+    public ArrayList<comments> getNewComments(int pgnum){
+        Map<String,Object> map = new HashMap<>();
+        map.put("pgnum",pgnum);
+        adminMapper.viewAllNewComments(map);
+        return (ArrayList<comments>)map.get("comments");
+    }
+
+    @Override
+    public int getNewCommentsTotal(){
+        Map<String,Object> map = new HashMap<>();
+        adminMapper.getNewCommentsTotal(map);
+        return (int)map.get("cnt");
+    }
+    
+    @Override
+    public Object passComment(String uid, String sid, String ctime){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid", uid);
+        map.put("songid",sid);
+        map.put("commenttime",ctime);
+        adminMapper.passComment(map);
+        return map.get("succ");
+    }
+
+    @Override
+	public Object failComment(String uid, String sid, String ctime){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid", uid);
+        map.put("songid",sid);
+        map.put("commenttime",ctime);
+        adminMapper.failComment(map);
+        return map.get("succ");
+    }
+
+    @Override
+    public int getBanTotal(){
+        Map<String,Object> map = new HashMap<>();
+        adminMapper.getBanTotal(map);
+        return (int)map.get("cnt");
+    }
+
+    @Override
+    public Object getBan(int pgnum){
+        Map<String,Object> map = new HashMap<>();
+        map.put("pgnum",pgnum);
+        adminMapper.getBan(map);
+        return map.get("bans");
+    }
+
+    @Override
+    public Object unBan(String uid){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid",uid);
+        adminMapper.unBan(map);
+        return map.get("succ");
+    }
+
+    @Override
+    public String[] getBasicInfo(String aid){
+        Map<String,Object> map = new HashMap<>();
+        map.put("adminid",aid);
+        adminMapper.getBasicInfo(map);
+        return ((String)map.get("info")).split("/",7);
     }
 
 }

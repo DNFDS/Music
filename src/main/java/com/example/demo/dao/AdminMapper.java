@@ -31,4 +31,24 @@ public interface AdminMapper {
     void deleteAlbum(Map<String, Object> map);
 
     void deleteSinger(Map<String, Object> map);
+
+    void banUser(Map<String, Object> map);
+
+    void banSingleUser(Map<String, Object> map);
+
+    void viewAllNewComments(Map<String, Object> map);
+
+    void getNewCommentsTotal(Map<String, Object> map);
+
+	void passComment(Map<String, Object> map);
+
+	void failComment(Map<String, Object> map);
+
+	void getBanTotal(Map<String, Object> map);
+
+	void getBan(Map<String, Object> map);
+
+    void unBan(Map<String, Object> map);
+    
+    void getBasicInfo(Map<String, Object> map);
 }

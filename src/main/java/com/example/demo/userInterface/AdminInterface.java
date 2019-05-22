@@ -1,9 +1,11 @@
 package com.example.demo.userInterface;
 
 import com.example.demo.entity.Album;
+import com.example.demo.entity.Ban;
 import com.example.demo.entity.Singer;
 import com.example.demo.entity.Song;
 import com.example.demo.entity.User;
+import com.example.demo.entity.comments;
 import com.example.demo.entity.result.ResultEntity;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.SingerService;
@@ -25,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -166,4 +171,50 @@ public class AdminInterface {
     public Object deleteSinger(@Param("singerid") String singerid){
         return adminService.deleteSinger(singerid);
     }
+
+    @GetMapping(value="/api/banUser")
+    public String banUser(@Param("adminid") String adminid){
+        return adminService.banUser(adminid);
+    }
+
+    @GetMapping(value="/api/getNewComments")
+    public ArrayList<comments> getNewComments(@Param("pgnum") int pgnum){
+        return adminService.getNewComments(pgnum);
+    }
+
+    @GetMapping(value="/api/getNewCommentsTotal")
+    public int getNewCommentsTotal(){
+        return adminService.getNewCommentsTotal();
+    }
+
+    @GetMapping(value="/api/passComment")
+    public Object passComment(@Param("uid") String uid,@Param("sid") String sid,@Param("ctime") String ctime){
+        return adminService.passComment(uid,sid,ctime);
+    }
+
+    @GetMapping(value="/api/failComment")
+    public Object failComment(@Param("uid") String uid,@Param("sid") String sid,@Param("ctime") String ctime){
+        return adminService.failComment(uid,sid,ctime);
+    }
+
+    @GetMapping(value="/api/getBanTotal")
+    public int getBanTotal(){
+        return adminService.getBanTotal();
+    }
+
+    @GetMapping(value="/api/getBan")
+    public Object getBan(@Param("pgnum") int pgnum){
+        return adminService.getBan(pgnum);
+    }
+
+    @GetMapping(value="/api/unBan")
+    public Object unBan(@Param("uid") String uid){
+        return adminService.unBan(uid);
+    }
+
+    @GetMapping(value="/api/getBasicInfo")
+    public String[] getBasicInfo(@Param("aid") String aid){
+        return adminService.getBasicInfo(aid);
+    }
+
 }

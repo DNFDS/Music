@@ -13,7 +13,7 @@
   <select id="getSingerById" parameterType="java.util.HashMap" statementType="CALLABLE">
     call SINGER_PKG.search_singer_by_id(#{singerid,mode=IN,jdbcType=VARCHAR},#{singers,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=SingerResultMap})
   </select>
-  <select id="getSingerByNamePart" parameterType="java.util.HashMap" statementType="CALLABLE">
+  <select id="getSingerByName_part" parameterType="java.util.HashMap" statementType="CALLABLE">
     call SINGER_PKG.search_singer_by_name_part(#{singername,mode=IN,jdbcType=VARCHAR},#{singers,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=SingerResultMap})
   </select>
   <select id="getSingerByName" parameterType="java.util.HashMap" statementType="CALLABLE">
