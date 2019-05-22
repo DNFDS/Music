@@ -8,7 +8,6 @@ import com.example.demo.service.UserService;
 import com.example.demo.util.AutoShowUtil;
 
 import org.apache.ibatis.annotations.Param;
-import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

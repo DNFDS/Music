@@ -15,5 +15,5 @@ public interface SingerService {
     boolean unfollowSinger(String userid,String singerid);
     ArrayList<Song> getSingerSong(String singerid);
     ArrayList<Album> getSingerAlbum(String singerid);
-
+    ArrayList<Singer> getSingerByNamePart(String word);
 }

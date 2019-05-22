@@ -43,6 +43,13 @@ public class SingerImpl implements SingerService {
 
     }
 
+    public ArrayList<Singer> getSingerByNamePart(String word){
+        Map<String,Object> map = new HashMap<>();
+        map.put("singername",word);
+        singerMapper.getSingerByName_part(map);
+        return (ArrayList<Singer>)map.get("singers");
+    }
+
     public ArrayList<Album> getSingerAlbum(String singerid){
         Map<String,Object> map = new HashMap<>();
         map.put("singerid",singerid);

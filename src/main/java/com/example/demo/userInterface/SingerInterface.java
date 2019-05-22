@@ -40,6 +40,11 @@ public class SingerInterface {
         return songService.getSingersInSong(songid).getObject();
     }
 
+    @GetMapping(value = "/api/searchSinger")
+    public Object searchSinger(@Param("word")String word){
+        return singerService.getSingerByNamePart(word);
+    }
+
 
     @RequestMapping(value = "/profile/showFollowSinger", method = RequestMethod.GET)
     public ModelAndView showFollowSinger(HttpServletRequest request, HttpServletResponse response){

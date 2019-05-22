@@ -37,6 +37,24 @@ public class SongInterface {
         return songListService.getSongsInSongList(i.getSonglistid()).getObject();
     }
 
+    @PostMapping(value = "/api/buildSong")
+    public Object buildSong(@RequestBody Map msgArr){
+        ArrayList<String> albumid = (ArrayList<String>)msgArr.get("albumid");
+        ArrayList<String> songid = (ArrayList<String>)msgArr.get("songid");
+        HashMap<String, Object> map = new HashMap<>();
+        ArrayList<Album> albums = new ArrayList<>();
+        ArrayList<Song> songs = new ArrayList<>();
+        for(String album : albumid) {
+            albums.add(albumService.getAlbumByAlbumId(album));
+        }
+        for(String song : songid) {
+            songs.add(songService.getSongById(song));
+        }
+        map.put("albums", albums);
+        map.put("songs", songs);
+        return map;
+    }
+
     @GetMapping(value = "/api/favoriteSong")
     public ResultEntity favoriteSong(@Param("songid")String songid, @Param("userid")String userid){
         SongList favorite = userService.getFavoritelist(userid);
