@@ -55,6 +55,11 @@ public class SongInterface {
         return map;
     }
 
+    @GetMapping(value="/api/getSong")
+    public Object getSong(@RequestParam("songid") String songid){
+        return songService.getSongById(songid);
+    }
+
     @GetMapping(value = "/api/favoriteSong")
     public ResultEntity favoriteSong(@Param("songid")String songid, @Param("userid")String userid){
         SongList favorite = userService.getFavoritelist(userid);
@@ -135,7 +140,7 @@ public class SongInterface {
         for(SongList i : createdsonglist){
             if(i.getSonglistname().equals("我喜欢")){
                 map.put("favoritesonglist",i);
-                e = songListService.getSongsInSongList(i);
+                e = songListService.getSongsInSongList(i.getSonglistid());
                 map.put("songs",e.getObject());
                 break;
             }

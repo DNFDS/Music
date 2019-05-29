@@ -94,13 +94,13 @@ get {{url}}/Search/Song?words=a
 get {{url}}/Search/SongList?words=啊
 
 ###
-get {{url}}/Search/Album?words=爱
+get {{url}}/Search/Album?words=
 
 ###
 get {{url}}/Search/User?words=l
 
 ###
-get {{url}}/searchSinger?word=周
+get {{url}}/searchSinger?word=王
 
 
 #################### about song
@@ -110,6 +110,9 @@ get {{url}}/favoriteSong?userid=100001&songid=4000000
 
 ###
 get {{url}}/KeepSong?songlistid=1555555&songid=4000000
+
+###
+get {{url}}/getSong?songid=4000000
 
 
 ###
