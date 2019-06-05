@@ -29,6 +29,9 @@ get {{url}}/getFavorite?id=100001
 get {{url}}/getSongListSavedNum?songlistid=3000508
 
 ###
+get {{url}}/getSongsOfSongList?songlistid=3000001
+
+###
 get {{url}}/getNumOfSongList?songlistid=3000508
 
 
