@@ -43,6 +43,9 @@ get {{url}}/createNewSonglist?name=新歌单&userid=100050
 ###
 get {{url}}/KeepSongList?userid=100011&songlistid=3000544
 
+###
+get {{url}}/isSonglistSaved?userid=100001&songlistid=3000536
+
 
 
 #################### about singer

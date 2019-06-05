@@ -20,4 +20,5 @@ public interface SongListService {
     ResultEntity getSongListSavedNum(String songlistid);
     ResultEntity getSingerInSongList(ArrayList<Song> songs);
     ResultEntity getAlbumsInSongList(ArrayList<Song> songs);
+    String isSonglistSaved(String userid,String songlistid);
 }

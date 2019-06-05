@@ -63,4 +63,7 @@
   <select id="getPushSonglist" parameterType="java.util.HashMap" statementType="CALLABLE">
   call PUSHSONG_PKG.push_sl(#{userid,mode=IN,jdbcType=VARCHAR},#{songlists,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=SongListResultMap})
   </select>
+  <select id="isSonglistSaved" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call SONGLIST_PKG.is_songlist_saved(#{userid,mode=IN,jdbcType=VARCHAR},#{songlistid,mode=IN,jdbcType=VARCHAR},#{saved,mode=OUT,jdbcType=VARCHAR})
+  </select>
 </mapper>

@@ -99,4 +99,9 @@ public class SongListInterface {
         map.put("toAdd",songid);
         return new ModelAndView("temp/songListChooser",map);
     }
+
+    @GetMapping(value = "/api/isSonglistSaved")
+    public String isSonglistSaved(@Param("userid") String userid,@Param("songlistid") String songlistid){
+        return songListService.isSonglistSaved(userid, songlistid);
+    }
 }

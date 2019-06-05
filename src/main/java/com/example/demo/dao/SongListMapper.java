@@ -136,4 +136,6 @@ public interface SongListMapper {
      * @OUT: "songlists"> ArrayList<SongList>
      */
     void getPushSonglist(Map<String, Object> Map);
+
+    void isSonglistSaved(Map<String, Object> Map);
 }
