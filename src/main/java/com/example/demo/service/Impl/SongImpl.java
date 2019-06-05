@@ -113,4 +113,18 @@ public class SongImpl implements SongService {
         return succ.equals("1");
     }
 
+    public String isSongBought(String songid, String albumid, String userid){
+        Map<String,Object> map = new HashMap<>();
+        map.put("musicid",songid);
+        map.put("userid",userid);
+        buyMapper.isMusicBought(map);
+        String sb=(String)map.get("bought");
+        map.remove("musicid");
+        map.put("musicid",albumid);
+        buyMapper.isMusicBought(map);
+        String ab=(String)map.get("bought");
+        String s=(sb.equals("1")||ab.equals("1"))?"1":"0";
+        return s;
+    }
+
 }

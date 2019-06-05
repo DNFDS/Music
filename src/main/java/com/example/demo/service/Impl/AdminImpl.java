@@ -94,6 +94,7 @@ public class AdminImpl implements AdminService {
         map.put("company",s.getCompany());
         map.put("adminid",s.getAdminid());
         map.put("albumid", s.getAlbumid());
+        map.put("free",s.getFree());
         adminMapper.addSong(map);
         return (String)map.get("succ");
     }
@@ -108,6 +109,7 @@ public class AdminImpl implements AdminService {
         map.put("company",a.getCompany());
         map.put("adminid",a.getAdminid());
         map.put("singerid", a.getSingerid());
+        map.put("free",a.getFree());
         adminMapper.addAlbum(map);
         return (String)map.get("succ");
     }

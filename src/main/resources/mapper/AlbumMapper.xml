@@ -10,6 +10,7 @@
     <result column="LANGUAGE" jdbcType="VARCHAR" property="language" />
     <result column="COMPANY" jdbcType="VARCHAR" property="company" />
     <result column="ADMINID" property="adminid" jdbcType="VARCHAR" />
+    <result column="FREE" property="free" jdbcType="VARCHAR" />
   </resultMap>
   
   <select id="getAlbumById" parameterType="java.util.HashMap" statementType="CALLABLE">

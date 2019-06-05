@@ -141,4 +141,9 @@ public class SongInterface {
             }
         }
     }
+
+    @GetMapping(value = "/api/isSongBought")
+    public String isSongBought(@Param("songid") String songid,@Param("albumid") String albumid,@Param("userid") String userid){
+        return songService.isSongBought(songid,albumid,userid);
+    }
 }

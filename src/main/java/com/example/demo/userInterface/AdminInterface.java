@@ -85,7 +85,8 @@ public class AdminInterface {
     @Param("school") String school,
     @Param("company") String company,
     @Param("age") String age,
-    @Param("adminid") String adminid
+    @Param("adminid") String adminid,
+    @Param("free") String free
     ){
         Song s=new Song();
         s.setAdminid(adminid);
@@ -97,6 +98,7 @@ public class AdminInterface {
         s.setSongid(id);
         s.setSongschool(school);
         s.setSongname(name);
+        s.setFree(free);
         return (String)adminService.addSong(s);
     }
 
@@ -109,7 +111,8 @@ public class AdminInterface {
     @Param("company") String company,
     @Param("age") String age,
     @Param("adminid") String adminid,
-    @Param("singerid") String singerid
+    @Param("singerid") String singerid,
+    @Param("free") String free
     ){
         Album a=new Album();
         a.setAdminid(adminid);
@@ -119,6 +122,7 @@ public class AdminInterface {
         a.setAlbumage(age);
         a.setSingerid(singerid);
         a.setAlbumname(name);
+        a.setFree(free);
         return (String)adminService.addAlbum(a);
     }
 
