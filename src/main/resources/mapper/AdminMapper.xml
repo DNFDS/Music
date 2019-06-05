@@ -12,10 +12,10 @@
   call ADMIN_PKG.is_admin_exist(#{id,mode=IN,jdbcType=VARCHAR},#{pwd,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
   </select>
   <select id="addSong" parameterType="java.util.HashMap" statementType="CALLABLE">
-  call ADMIN_PKG.add_song(#{songid,mode=IN,jdbcType=VARCHAR},#{songname,mode=IN,jdbcType=VARCHAR},#{length,mode=IN,jdbcType=VARCHAR},#{school,mode=IN,jdbcType=VARCHAR},#{language,mode=IN,jdbcType=VARCHAR},#{age,mode=IN,jdbcType=VARCHAR},#{company,mode=IN,jdbcType=VARCHAR},#{adminid,mode=IN,jdbcType=VARCHAR},#{albumid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+  call ADMIN_PKG.add_song(#{songid,mode=IN,jdbcType=VARCHAR},#{songname,mode=IN,jdbcType=VARCHAR},#{length,mode=IN,jdbcType=VARCHAR},#{school,mode=IN,jdbcType=VARCHAR},#{language,mode=IN,jdbcType=VARCHAR},#{age,mode=IN,jdbcType=VARCHAR},#{company,mode=IN,jdbcType=VARCHAR},#{adminid,mode=IN,jdbcType=VARCHAR},#{albumid,mode=IN,jdbcType=VARCHAR},#{free,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
   </select>
   <select id="addAlbum" parameterType="java.util.HashMap" statementType="CALLABLE">
-  call ADMIN_PKG.add_album(#{albumid,mode=IN,jdbcType=VARCHAR},#{albumname,mode=IN,jdbcType=VARCHAR},#{albumage,mode=IN,jdbcType=VARCHAR},#{language,mode=IN,jdbcType=VARCHAR},#{company,mode=IN,jdbcType=VARCHAR},#{adminid,mode=IN,jdbcType=VARCHAR},#{singerid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
+  call ADMIN_PKG.add_album(#{albumid,mode=IN,jdbcType=VARCHAR},#{albumname,mode=IN,jdbcType=VARCHAR},#{albumage,mode=IN,jdbcType=VARCHAR},#{language,mode=IN,jdbcType=VARCHAR},#{company,mode=IN,jdbcType=VARCHAR},#{adminid,mode=IN,jdbcType=VARCHAR},#{singerid,mode=IN,jdbcType=VARCHAR},#{free,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
   </select>
   <select id="addSinger" parameterType="java.util.HashMap" statementType="CALLABLE">
   call ADMIN_PKG.add_singer(#{singerid,mode=IN,jdbcType=VARCHAR},#{singername,mode=IN,jdbcType=VARCHAR},#{region,mode=IN,jdbcType=VARCHAR},#{sex,mode=IN,jdbcType=VARCHAR},#{intro,mode=IN,jdbcType=VARCHAR},#{adminid,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})

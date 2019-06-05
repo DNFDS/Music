@@ -31,6 +31,9 @@ get {{url}}/getFavorite?id=100001
 get {{url}}/getSongListSavedNum?songlistid=3000508
 
 ###
+get {{url}}/getSongsOfSongList?songlistid=3000001
+
+###
 get {{url}}/getNumOfSongList?songlistid=3000508
 
 
@@ -39,6 +42,9 @@ get {{url}}/createNewSonglist?name=新歌单&userid=100050
 
 ###
 get {{url}}/KeepSongList?userid=100011&songlistid=3000544
+
+###
+get {{url}}/isSonglistSaved?userid=100001&songlistid=3000536
 
 
 

@@ -37,4 +37,7 @@ public interface BuyMapper {
      * @OUT: "albums" > ArrayList<Album>
      */
     void getBoughtAlbums(Map<String,Object> Map);
+
+    void isMusicBought(Map<String,Object> Map);
+
 }

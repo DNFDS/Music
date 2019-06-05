@@ -43,6 +43,12 @@ public class SongListInterface {
         return songs.size();
     }
 
+    @GetMapping(value = "/api/getSongsOfSongList")
+    public Object getSongsOfSongList(@Param("songlistid") String songlistid){
+        ArrayList<Song> songs = (ArrayList<Song>)songListService.getSongsInSongList(songlistid).getObject();
+        return songs;
+    }
+
     @GetMapping(value = "/api/showCreatedSongList")
     public Object showCreatedSongList(@Param("id") String id){
         //如果请求的form页面，就直接返回
@@ -115,5 +121,10 @@ public class SongListInterface {
         map.put("songlists",createdsonglist);
         map.put("toAdd",songid);
         return new ModelAndView("temp/songListChooser",map);
+    }
+
+    @GetMapping(value = "/api/isSonglistSaved")
+    public String isSonglistSaved(@Param("userid") String userid,@Param("songlistid") String songlistid){
+        return songListService.isSonglistSaved(userid, songlistid);
     }
 }
