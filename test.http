@@ -20,6 +20,8 @@ get {{url}}/getUser?id=100001
 get {{url}}/getSongList?id=100001
 
 ###
+get {{url}}/getSongListById?id=4000005
+###
 get {{url}}/showCreatedSongList?id=100001
 
 ###
