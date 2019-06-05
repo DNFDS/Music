@@ -36,7 +36,10 @@ public class SongInterface {
         SongList i = userService.getFavoritelist(id);
         return songListService.getSongsInSongList(i.getSonglistid()).getObject();
     }
-
+    @GetMapping(value="/api/getSongsInList")
+    public List<Song> getSongsInList(@Param("songListId") String songListId){
+        return (List<Song>)songListService.getSongsInSongList(songListId).getObject();
+    }
     @PostMapping(value = "/api/buildSong")
     public Object buildSong(@RequestBody Map msgArr){
         ArrayList<String> albumid = (ArrayList<String>)msgArr.get("albumid");
@@ -53,6 +56,11 @@ public class SongInterface {
         map.put("albums", albums);
         map.put("songs", songs);
         return map;
+    }
+
+    @GetMapping(value="/api/getSong")
+    public Object getSong(@RequestParam("songid") String songid){
+        return songService.getSongById(songid);
     }
 
     @GetMapping(value = "/api/favoriteSong")
@@ -89,6 +97,7 @@ public class SongInterface {
         System.out.println(commentText);
         return songService.commentSong(commentText,songID,userID);
     }
+
     @RequestMapping(value="/api/getSongInfo", method = RequestMethod.GET)
     public Map<String, Object> getSongInfoBySongID(@RequestParam("songId") String songID){
         Song song = songService.getSongById(songID);
@@ -135,7 +144,7 @@ public class SongInterface {
         for(SongList i : createdsonglist){
             if(i.getSonglistname().equals("我喜欢")){
                 map.put("favoritesonglist",i);
-                e = songListService.getSongsInSongList(i);
+                e = songListService.getSongsInSongList(i.getSonglistid());
                 map.put("songs",e.getObject());
                 break;
             }

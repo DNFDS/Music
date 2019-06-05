@@ -12,9 +12,14 @@
 
 ### IntelliJ IDEA ###
 .idea
+
 *.iws
+
 *.iml
+
 *.ipr
+
+/.idea/
 
 ### NetBeans ###
 /nbproject/private/
@@ -23,5 +28,7 @@
 /dist/
 /nbdist/
 /.nb-gradle/
-
 .vscode
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml

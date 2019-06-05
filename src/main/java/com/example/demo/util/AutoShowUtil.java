@@ -46,9 +46,9 @@ public class AutoShowUtil {
         ArrayList<Integer>savenum = new ArrayList<>();
         ArrayList<User>users = new ArrayList<>();
         for(SongList list : songLists){
-            ArrayList<Song> l = (ArrayList<Song>)songListService.getSongsInSongList(list).getObject();
+            ArrayList<Song> l = (ArrayList<Song>)songListService.getSongsInSongList(list.getSonglistid()).getObject();
             songnum.add(l.size());
-            savenum.add((int)songListService.getSongListSavedNum(list).getObject());
+            savenum.add((int)songListService.getSongListSavedNum(list.getSonglistid()).getObject());
             User user = (User) userService.getUserById(list.getUserid()).getObject();
             users.add(user);
         }

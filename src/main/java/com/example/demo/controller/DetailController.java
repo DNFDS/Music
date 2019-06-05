@@ -51,11 +51,11 @@ public class DetailController {
     @RequestMapping(value ="/SongList",method = RequestMethod.GET)
     public String songListDetail(@RequestParam("songlistid") String songlistid, Map<String, Object> map,HttpServletRequest request){
         SongList songList = songListService.getSongListById(songlistid);
-        ResultEntity e = songListService.getSongsInSongList(songList);
+        ResultEntity e = songListService.getSongsInSongList(songList.getSonglistid());
         ArrayList<Song>songs = (ArrayList<Song>)e.getObject();
         String style = showUtil.getSongListStyle(songs);
         map.putAll(showUtil.showSong(songs));
-        e = songListService.getSongListSavedNum(songList);
+        e = songListService.getSongListSavedNum(songList.getSonglistid());
         int num = (int)e.getObject();
         e = userService.getUserById(songList.getUserid());
         User creater = (User)e.getObject();

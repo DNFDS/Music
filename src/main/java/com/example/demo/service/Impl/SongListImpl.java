@@ -44,6 +44,10 @@ public class SongListImpl implements SongListService {
         map.put("songlistid",songlistid);
         songListMapper.getSongsInSongList(map);
         ArrayList<Song> songs = (ArrayList<Song>)map.get("songs");
+        System.out.println(songlistid);
+        for(int i=0; i<songs.size(); i++){
+
+        }
         return new ResultEntity(true,"",songs);
     }
 

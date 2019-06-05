@@ -20,6 +20,8 @@ get {{url}}/getUser?id=100001
 get {{url}}/getSongList?id=100001
 
 ###
+get {{url}}/getSongListById?id=4000005
+###
 get {{url}}/showCreatedSongList?id=100001
 
 ###
@@ -27,6 +29,9 @@ get {{url}}/getFavorite?id=100001
 
 ###
 get {{url}}/getSongListSavedNum?songlistid=3000508
+
+###
+get {{url}}/getSongsOfSongList?songlistid=3000001
 
 ###
 get {{url}}/getNumOfSongList?songlistid=3000508
@@ -94,13 +99,13 @@ get {{url}}/Search/Song?words=a
 get {{url}}/Search/SongList?words=啊
 
 ###
-get {{url}}/Search/Album?words=爱
+get {{url}}/Search/Album?words=
 
 ###
 get {{url}}/Search/User?words=l
 
 ###
-get {{url}}/searchSinger?word=周
+get {{url}}/searchSinger?word=王
 
 
 #################### about song
@@ -110,6 +115,9 @@ get {{url}}/favoriteSong?userid=100001&songid=4000000
 
 ###
 get {{url}}/KeepSong?songlistid=1555555&songid=4000000
+
+###
+get {{url}}/getSong?songid=4000000
 
 
 ###
