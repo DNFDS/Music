@@ -37,6 +37,28 @@ public class DetailController {
     @Autowired
     private PlayerService playerService;
 
+    @ResponseBody
+    @RequestMapping(value ="/api/getSongAndAlbumOfSinger",method = RequestMethod.GET)
+    public Object singerDetail(@RequestParam("singerid") String singerid, @RequestParam("userid") String userid){
+        Map<String, Object> map = new HashMap<>();
+        ArrayList<Song> songs = singerService.getSingerSong(singerid);
+        if(songs.size()>5){
+            // 取前五个歌曲加入map
+            map.put("songs",songs.subList(0,4));
+        }else {
+            map.put("songs",songs);
+        }
+        ArrayList<Album> albums = singerService.getSingerAlbum(singerid);
+        Boolean isfollow = false;
+        if (userid != null && !userid.isEmpty()) {
+            isfollow = singerService.isUserLikeSinger(singerid, userid);
+        }
+        map.put("isfollow",isfollow);
+        map.put("albumNum",albums.size());
+        map.put("songNum", songs.size());
+        return map;
+    }
+
     @RequestMapping(value ="/Song",method = RequestMethod.GET)
     public String songDetail(@RequestParam("songid") String songid, Map<String, Object> map,HttpServletRequest request){
         Song song = songService.getSongById(songid);
@@ -65,28 +87,6 @@ public class DetailController {
         map.put("songlist",songList);
         return "Details/songlist_detail";
         //"songs" "singers" "singername" "albums"
-    }
-    @RequestMapping(value ="/Singer",method = RequestMethod.GET)
-    public String singerDetail(@RequestParam("singerid") String singerid, Map<String, Object> map,HttpServletRequest request){
-        User user = (User) request.getSession(false).getAttribute("user");
-        Singer singer = singerService.getSingerById(singerid);
-        ArrayList<Song> songs = singerService.getSingerSong(singerid);
-        if(songs.size()>5){
-            map.put("songs",songs.subList(0,4));
-        }else {
-            map.put("songs",songs);
-        }
-        ArrayList<Album> albums = singerService.getSingerAlbum(singerid);
-        Boolean isfollow = singerService.isUserLikeSinger(singerid,user.getUserid());
-        map.put("isfollow",isfollow);
-        int follownum = singerService.getFansNum(singerid);
-        ResultEntity e = songListService.getSingerInSongList(songs);
-        map.put("singers",e.getObject());
-        map.put("albums",albums);
-        map.put("singer",singer);
-        map.put("follownum",follownum);
-        return "Details/singer_detail";
-       //"songs" "albums" "follownum"
     }
     @RequestMapping(value ="/Album",method = RequestMethod.GET)
     public String albumDetail(@RequestParam("albumid") String albumid, Map<String, Object> map,HttpServletRequest request){
