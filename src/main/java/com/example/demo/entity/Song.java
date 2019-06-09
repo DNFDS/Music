@@ -31,6 +31,10 @@ public class Song {
 
     private String free;
 
+    private String singer;
+
+    private String lyric;
+
     public String getFree(){
         return free;
     }
@@ -141,5 +145,21 @@ public class Song {
 
     public void setSavenum(BigDecimal savenum) {
         this.savenum = savenum;
+    }
+
+    public String getSinger() {
+        return singer;
+    }
+
+    public void setSinger(String singer) {
+        this.singer = singer;
+    }
+
+    public String getLyric() {
+        return lyric;
+    }
+
+    public void setLyric(String lyric) {
+        this.lyric = lyric;
     }
 }

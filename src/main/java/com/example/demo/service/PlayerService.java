@@ -10,4 +10,5 @@ public interface PlayerService
     Song getSongByID(Map<String, Object> Map);
     ArrayList<Integer> getListByAlbumID(Map<String, Object> Map);
     ArrayList<Integer> getListByListID(Map<String, Object> Map);
+    Integer addSong(String songID,String path,String name,String image,String length,String albumID,String singer,String lrc);
 }
