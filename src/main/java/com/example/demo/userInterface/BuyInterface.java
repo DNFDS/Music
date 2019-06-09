@@ -10,6 +10,7 @@ import com.example.demo.util.AutoShowUtil;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 public class BuyInterface {
     @Autowired
     private SongService songService;
