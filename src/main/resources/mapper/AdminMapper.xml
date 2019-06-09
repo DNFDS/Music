@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.dao.AdminMapper" >
-  <resultMap id="BaseResultMap" type="com.example.demo.entity.Admin" >
-    <id column="ADMINID" property="adminid" jdbcType="VARCHAR" />
-    <result column="ADMINPASSWORD" property="adminpassword" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Admin">
+    <id column="ADMINID" jdbcType="VARCHAR" property="adminid" />
+    <result column="ADMINPASSWORD" jdbcType="VARCHAR" property="adminpassword" />
   </resultMap>
-  <resultMap id="StringMap" type="String" >
-    <id column="USERID" property="userid" jdbcType="VARCHAR" />
+  <resultMap id="StringMap" type="String">
+    <id column="USERID" jdbcType="VARCHAR" property="userid" />
   </resultMap>
   <select id="isAdminExist" parameterType="java.util.HashMap" statementType="CALLABLE">
   call ADMIN_PKG.is_admin_exist(#{id,mode=IN,jdbcType=VARCHAR},#{pwd,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
@@ -79,5 +79,29 @@
   </select>
   <select id="getBasicInfo" parameterType="java.util.HashMap" statementType="CALLABLE">
   call ADMIN_PKG.get_basic_info(#{adminid,mode=IN,jdbcType=VARCHAR},#{info,mode=OUT,jdbcType=VARCHAR})
+  </select>
+  <select id="getSingerTotal" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_singer_total(#{cnt,mode=OUT,jdbcType=INTEGER})
+  </select>
+  <select id="getAlbumTotal" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_album_total(#{cnt,mode=OUT,jdbcType=INTEGER})
+  </select>
+  <select id="getSongTotal" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_song_total(#{cnt,mode=OUT,jdbcType=INTEGER})
+  </select>
+  <select id="getSingers" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_singers(#{pgnum,mode=IN,jdbcType=INTEGER},#{singers,mode=OUT,jdbcType=CURSOR,resultMap=SingerResultMap})
+  </select>
+  <select id="getAlbums" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_albums(#{pgnum,mode=IN,jdbcType=INTEGER},#{albums,mode=OUT,jdbcType=CURSOR,resultMap=AlbumResultMap})
+  </select>
+  <select id="getSongs" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.get_songs(#{pgnum,mode=IN,jdbcType=INTEGER},#{songs,mode=OUT,jdbcType=CURSOR,resultMap=SongResultMap})
+  </select>
+  <select id="fuzzySingers" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.fuzzy_singer(#{singername,mode=IN,jdbcType=VARCHAR},#{singers,mode=OUT,jdbcType=CURSOR,resultMap=SingerResultMap})
+  </select>
+  <select id="changeSingerImg" parameterType="java.util.HashMap" statementType="CALLABLE">
+  call ADMIN_PKG.changeSingerImg(#{singerid,mode=IN,jdbcType=VARCHAR},#{url,mode=IN,jdbcType=VARCHAR},#{succ,mode=OUT,jdbcType=VARCHAR})
   </select>
 </mapper>

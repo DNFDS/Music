@@ -221,4 +221,45 @@ public class AdminInterface {
         return adminService.getBasicInfo(aid);
     }
 
+    @GetMapping(value="/api/getSingerTotal")
+    public int getSingerTotal(){
+        return adminService.getSingerTotal();
+    }
+
+    @GetMapping(value="/api/getAlbumTotal")
+    public int getAlbumTotal(){
+        return adminService.getAlbumTotal();
+    }
+
+    @GetMapping(value="/api/getSongTotal")
+    public int getSongTotal(){
+        return adminService.getSongTotal();
+    }
+
+    @GetMapping(value="/api/getSingers")
+    public ArrayList<Singer> getSingers(@Param("pgnum") int pgnum){
+        return adminService.getSingers(pgnum);
+    }
+
+    @GetMapping(value="/api/getAlbums")
+    public ArrayList<Album> getAlbums(@Param("pgnum") int pgnum){
+        return adminService.getAlbums(pgnum);
+    }
+
+    @GetMapping(value="/api/getSongs")
+    public ArrayList<Song> getSongs(@Param("pgnum") int pgnum){
+        return adminService.getSongs(pgnum);
+    }
+
+    @GetMapping(value="/api/fuzzySingers")
+    public ArrayList<Singer> fuzzySingers(@Param("singername") String singername){
+        return adminService.fuzzySingers(singername);
+    }
+
+    @GetMapping(value="/api/changeSingerImg")
+    public String changeSingerImg(@Param("singerid") String singerid,@Param("url") String url){
+        return adminService.changeSingerImg(singerid, url);
+    }
+
+
 }
