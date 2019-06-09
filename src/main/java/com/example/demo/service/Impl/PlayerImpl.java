@@ -8,6 +8,7 @@ import com.example.demo.service.PlayerService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,5 +58,28 @@ public class PlayerImpl implements PlayerService
             integerArrayList.add(Integer.parseInt(i.getSongid()));
         }
         return integerArrayList;
+    }
+
+    @Override
+    public Integer addSong(String songID,String path, String name, String image, String length, String albumID, String singer, String lrc) {
+        Song song=new Song();
+        song.setAlbumid(albumID!=null?albumID:"-1");
+        song.setAdminid("1002");
+        song.setCompany(name.length()%3==0?"索尼音乐":name.length()%3==1?"腾讯音乐":"网易音乐");
+        song.setFree("1");
+        song.setLanguage("中文");
+        song.setLength(length!=null?length:"-1");
+        song.setLyric(lrc);
+        song.setPlaytimes(0);
+        song.setSavenum(new BigDecimal(0));
+        song.setSinger(singer!=null?singer:"-1");
+        song.setSongage("00");
+        song.setSongimage(image);
+        song.setSongname(name);
+        song.setSongpath(path);
+        song.setSongschool(Integer.parseInt(length)%3==0?"古典":Integer.parseInt(length)%3==1?"流行":"嘻哈");
+        song.setSongid(songID);
+
+        return songMapper.addSong(song);
     }
 }

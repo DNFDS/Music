@@ -5,6 +5,7 @@ import com.example.demo.service.PlayerService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -241,6 +242,12 @@ public class PlayerController
         hashMap.put("songid",songID);
         Song temp=playerService.getSongByID(hashMap);
         return temp;
+    }
+    @PostMapping(value = "/api/addSearchSong")
+    @ResponseBody
+    public Integer addSong(String songID,String path,String name,String image,String length,String albumID,String singer,String lrc)
+    {
+        return playerService.addSong(songID,path,name,image,length,albumID,singer,lrc);
     }
 
     /*@RequestMapping(value = "/getSongsByListID",method = RequestMethod.POST)
