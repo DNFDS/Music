@@ -1,5 +1,8 @@
 package com.example.demo.dao;
 
+import com.example.demo.entity.Album;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.Map;
 
 public interface AlbumMapper {
@@ -37,4 +40,6 @@ public interface AlbumMapper {
      * @OUT: "albums"> ArrayList<Album>
      */
     void getAllAlbum(Map<String,Object> Map);
+
+    Integer addAlbum(@Param("album") Album album);
 }

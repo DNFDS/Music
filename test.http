@@ -125,6 +125,8 @@ get {{url}}/KeepSong?songlistid=1555555&songid=4000000
 ###
 get {{url}}/getSong?songid=4000000
 
-
 ###
 get {{url}}//buildSong
+
+###
+get {{url}}/isSongBought?songid=4000000&albumid=1000000&userid=100001
