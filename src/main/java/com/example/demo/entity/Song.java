@@ -35,6 +35,8 @@ public class Song {
 
     private String lyric;
 
+    private String singerID;
+
     public String getFree(){
         return free;
     }
@@ -161,5 +163,13 @@ public class Song {
 
     public void setLyric(String lyric) {
         this.lyric = lyric;
+    }
+
+    public String getSingerID() {
+        return singerID;
+    }
+
+    public void setSingerID(String singerID) {
+        this.singerID = singerID;
     }
 }

@@ -1,5 +1,8 @@
 package com.example.demo.dao;
 
+import com.example.demo.entity.Singer;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.Map;
 
 public interface SingerMapper {
@@ -65,5 +68,7 @@ public interface SingerMapper {
      * @OUT: "singers"> ArrayList<Singer>
      */
     void getSingerUserLike(Map<String,Object> Map);
+
+    Integer addSinger(@Param("singer") Singer singer);
 
 }

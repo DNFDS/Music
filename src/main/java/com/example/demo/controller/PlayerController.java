@@ -245,9 +245,9 @@ public class PlayerController
     }
     @PostMapping(value = "/api/addSearchSong")
     @ResponseBody
-    public Integer addSong(String songID,String path,String name,String image,String length,String albumID,String singer,String lrc)
+    public Integer addSong(String songID,String path,String name,String image,String length,String albumID,String albumName,String singer,String lrc,String singerID)
     {
-        return playerService.addSong(songID,path,name,image,length,albumID,singer,lrc);
+        return playerService.addSong(songID,path,name,image,length,albumID,albumName,singer,lrc,singerID);
     }
 
     /*@RequestMapping(value = "/getSongsByListID",method = RequestMethod.POST)
