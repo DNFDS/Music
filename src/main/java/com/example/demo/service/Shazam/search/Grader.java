@@ -2,7 +2,10 @@ package com.example.demo.service.Shazam.search;
 
 import com.example.demo.service.Shazam.hash.Hash;
 
+import com.example.demo.service.Impl.ShazamImpl;
+import com.example.demo.service.ShazamService;
 import java.util.*;
+// import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by Wen Ke on 2016/10/22.
@@ -10,6 +13,8 @@ import java.util.*;
 public class Grader {
     
     public static final int time_level = 5;   // each column of the histogram is approximately 0.5 sec
+    
+    private static ShazamService ORMapping = new ShazamImpl();
     
     public static ArrayList<SongScore> grade(final ArrayList<Hash> targetHashes) {
         return grade(gatherMatchingHashes(targetHashes));
@@ -34,7 +39,7 @@ public class Grader {
             current_hash_id = targetHash.getHashID();
             // if targetHash.getHashID is a new hash id.
             if (current_hash_id != last_hash_id) {
-                matchingHashes = ORMapping.selectHash(targetHash);
+                matchingHashes = ORMapping.selectHash(targetHash.getHashID());
             }
             // update last_hash_id
             last_hash_id = current_hash_id;

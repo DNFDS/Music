@@ -58,7 +58,7 @@ public class CombineHash {
         double max;
         int max_freq;
 
-        // find the peak frequency in each interval
+        // find the peak frequency in each frequency interval
         for (int i = 0; i < interval_num; ++i) {
             max = 0;
             max_freq = freqRanges[i][0];
