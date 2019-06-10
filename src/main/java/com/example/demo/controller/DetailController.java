@@ -50,6 +50,7 @@ public class DetailController {
         }else {
             map.put("songs",songs);
         }
+        Singer singer = singerService.getSingerById(singerid);
         ArrayList<Album> albums = singerService.getSingerAlbum(singerid);
         Boolean isfollow = false;
         if (userid != null && !userid.isEmpty()) {
@@ -58,6 +59,7 @@ public class DetailController {
         map.put("isfollow",isfollow);
         map.put("albumNum",albums.size());
         map.put("songNum", songs.size());
+        map.put("singer", singer);
         return map;
     }
 
