@@ -117,14 +117,15 @@ public class SongImpl implements SongService {
     }
 
     public String isSongBought(String songid, String albumid, String userid){
-        Map<String,Object> umap = new HashMap<>();
-        umap.put("userid",userid);
-        uMapper.getUserById(umap);
-        User u = ((ArrayList<User>)umap.get("result")).get(0);
-        if(u.getIsvip().equals("1")){
-            return "2";
+        if (userid != null && !userid.isEmpty()) {
+            Map<String,Object> umap = new HashMap<>();
+            umap.put("userid",userid);
+            uMapper.getUserById(umap);
+            User u = ((ArrayList<User>)umap.get("result")).get(0);
+            if(u.getIsvip().equals("1")){
+                return "2";
+            }
         }
-        else{
         Map<String,Object> map = new HashMap<>();
         map.put("musicid",songid);
         map.put("userid",userid);
@@ -136,7 +137,6 @@ public class SongImpl implements SongService {
         String ab=(String)map.get("bought");
         String s=(sb.equals("1")||ab.equals("1"))?"1":"0";
         return s;
-        }
     }
 
 }

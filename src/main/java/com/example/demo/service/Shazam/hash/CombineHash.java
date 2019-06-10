@@ -58,7 +58,7 @@ public class CombineHash {
         double max;
         int max_freq;
 
-        // find the peak frequency in each interval
+        // find the peak frequency in each frequency interval
         for (int i = 0; i < interval_num; ++i) {
             max = 0;
             max_freq = freqRanges[i][0];
@@ -101,10 +101,13 @@ public class CombineHash {
         return hashes;
     }
     
-    public static ArrayList<Hash> generateFingerprint(File song, int id) throws IOException {
+    /**
+     *  generate fingerprint for songs
+     */
+    public static ArrayList<Hash> generateFingerprint(File song, int id, int type) throws IOException {
     
         // extract PCM data
-        PCM16MonoData data = PCM16MonoParser.parse(song);
+        PCM16MonoData data = PCM16MonoParser.parse(song,type);
         CombineHash map = new CombineHash(id);
     
         for (int i = 0; i < data.getSampleNum(); ) {

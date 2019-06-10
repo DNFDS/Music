@@ -12,7 +12,7 @@ import java.io.RandomAccessFile;
  * —— 参考 https://github.com/winston-wen/Shazam/ 实现
  */
 public class PCM16MonoParser {
-    public static PCM16MonoData parse(File f) throws IOException {
+    public static PCM16MonoData parse(File f,int type) throws IOException {
         RandomAccessFile rfile = new RandomAccessFile(f, "r");
         if (rfile.length() < 46)
             throw new RuntimeException("Broken WAV file!");
@@ -68,24 +68,33 @@ public class PCM16MonoParser {
         /**
          * If the file has extra parameters
          */
-        rfile.seek(36);
-        if (rfile.readShort() != (short) 0x0000) {
-            throw new RuntimeException("The audio has extra parameters in its \"fmt \" block");
-        }
+        // rfile.seek(36);
+        // if (rfile.readShort() != (short) 0x0000) {
+        //     throw new RuntimeException("The audio has extra parameters in its \"fmt \" block");
+        // }
 
         /**
          * Find the data size
+         * type to determine which data source pcm is from
          */
-        rfile.seek(42);
+        int headerLength = 44;
+        if(type == 1){
+            headerLength = 46;
+        }
+        else if(type == 2){
+            headerLength = 44;
+        }
+        
+        rfile.seek(headerLength - 4);
         int a = rfile.readByte() & 0xFF;
-        rfile.seek(43);
+        rfile.seek(headerLength - 3);
         int b = (rfile.readByte() << 8) & 0xFF00;
-        rfile.seek(44);
+        rfile.seek(headerLength - 2);
         int c = (rfile.readByte() << 16) & 0xFF0000;
-        rfile.seek(45);
+        rfile.seek(headerLength - 1);
         int d = (rfile.readByte() << 24) & 0xFF000000;
         int size = d | c | b | a;
-        if (size + 46 != f.length()) {
+        if (size + headerLength != f.length()) {
             throw new RuntimeException("The audio is broken");
         }
 

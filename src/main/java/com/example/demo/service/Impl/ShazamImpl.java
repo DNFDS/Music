@@ -53,6 +53,6 @@ public class ShazamImpl implements ShazamService{
         Map<String,Object> map = new HashMap<>();
         map.put("songname",songName);
         hMapper.insertSong(map);
-        return (int)map.get("songid");
+        return Integer.parseInt(map.get("songid").toString());
     }
 }
