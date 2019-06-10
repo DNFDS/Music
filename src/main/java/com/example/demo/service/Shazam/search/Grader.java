@@ -2,6 +2,9 @@ package com.example.demo.service.Shazam.search;
 
 import com.example.demo.service.Shazam.hash.Hash;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.example.demo.service.Impl.ShazamImpl;
 import com.example.demo.service.ShazamService;
 import java.util.*;
@@ -10,17 +13,19 @@ import java.util.*;
 /**
  * Created by Wen Ke on 2016/10/22.
  */
+@Component
 public class Grader {
     
-    public static final int time_level = 5;   // each column of the histogram is approximately 0.5 sec
+    public  final int time_level = 5;   // each column of the histogram is approximately 0.5 sec
     
-    private static ShazamService ORMapping = new ShazamImpl();
+    @Autowired
+    private  ShazamService ORMapping;
     
-    public static ArrayList<SongScore> grade(final ArrayList<Hash> targetHashes) {
+    public  ArrayList<SongScore> grade(final ArrayList<Hash> targetHashes) {
         return grade(gatherMatchingHashes(targetHashes));
     }
     
-    private static Statistics gatherMatchingHashes(final ArrayList<Hash> targetHashes) {
+    private  Statistics gatherMatchingHashes(final ArrayList<Hash> targetHashes) {
         // sort target hashes by hash id
         // so that identical hash_id will be queried ONLY ONCE
         Collections.sort(targetHashes, new Comparator<Hash>() {
@@ -59,7 +64,7 @@ public class Grader {
     /**
      * return a grading result
      */
-    private static ArrayList<SongScore> grade(Statistics stat) {
+    private  ArrayList<SongScore> grade(Statistics stat) {
         ArrayList<SongScore> ret = new ArrayList<>();
         
         // iterate each possible song
@@ -97,6 +102,7 @@ public class Grader {
             SongScore score = new SongScore();
             score.id = song_id;
             score.score = max;
+            score.songName = ORMapping.getSongName(song_id);
             ret.add(score);
         }
         

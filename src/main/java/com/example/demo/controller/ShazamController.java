@@ -27,6 +27,8 @@ public class ShazamController {
 
     @Autowired
     private ShazamService ORMapping;
+    @Autowired
+    private Grader grader;
 
     public void MusicArchiver(){
 
@@ -50,7 +52,7 @@ public class ShazamController {
                 
                 // register a song and get its id.
                 String id = ORMapping.insertSong(song.getName());
-                System.out.printf("Get id %d\n", id);
+                System.out.printf("Get id %s\n", id);
                 
                 // generate hashes.
                 ArrayList<Hash> hashes = CombineHash.generateFingerprint(song, id, 1);
@@ -62,6 +64,9 @@ public class ShazamController {
                 // clear mem space.
                 hashes = null;
                 System.gc();
+
+                System.out.print("Building index ...");
+                ORMapping.buildIndex();
                 
                 long song_end = System.currentTimeMillis();
                 System.out.printf("Finish generating fingerprints, time elapsed : %.2f!\n==============\n", (song_end-song_start)/1000.0);
@@ -98,12 +103,12 @@ public class ShazamController {
 
                 System.out.println("Extracting fingerprints ...");
 
-                ArrayList<Hash> hashes = CombineHash.generateFingerprint(song, "", 1);
+                ArrayList<Hash> hashes = CombineHash.generateFingerprint(song, "", 2);
 
                 System.out.println("Finish extracting fingerprints, start grading");
 
                 // call the grading module
-                ArrayList<SongScore> scores = Grader.grade(hashes);
+                ArrayList<SongScore> scores = grader.grade(hashes);
 
                 for (int i=0; i<5 && i<scores.size(); ++i) {
                     System.out.println(scores.get(i));
@@ -125,6 +130,7 @@ public class ShazamController {
 
     @GetMapping("/testupload")
     public String index() {
+        ORMapping.buildIndex();
         return "upload";
     }
 }

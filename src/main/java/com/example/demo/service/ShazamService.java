@@ -9,5 +9,5 @@ public interface ShazamService {
     void buildIndex();
     String getSongName(String songid);
     ArrayList<Hash> selectHash(int hashid);
-    int insertSong(String songName);
+    String insertSong(String songName);
 }

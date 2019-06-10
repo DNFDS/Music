@@ -6,9 +6,10 @@ package com.example.demo.service.Shazam.search;
 public class SongScore {
     public String id;
     public int score;
+    public String songName;
 
     @Override
     public String toString() {
-        return String.format("score=%d for [%d](%s)", score, id);
+        return String.format("score=%d for (%s)[%s]", score, id, songName);
     }
 }
