@@ -10,6 +10,5 @@ import java.util.HashMap;
  */
 class Statistics extends HashMap<Integer, ArrayList<Integer>> {
 
-    private static final long serialVersionUID = 1L;
 
 }

@@ -101,10 +101,13 @@ public class CombineHash {
         return hashes;
     }
     
-    public static ArrayList<Hash> generateFingerprint(File song, int id) throws IOException {
+    /**
+     *  generate fingerprint for songs
+     */
+    public static ArrayList<Hash> generateFingerprint(File song, int id, int type) throws IOException {
     
         // extract PCM data
-        PCM16MonoData data = PCM16MonoParser.parse(song);
+        PCM16MonoData data = PCM16MonoParser.parse(song,type);
         CombineHash map = new CombineHash(id);
     
         for (int i = 0; i < data.getSampleNum(); ) {
