@@ -34,13 +34,13 @@ public class CombineHash {
      * The strongest frequencies for each frame
      */
     private ArrayList<int[]> strong_freqs = new ArrayList<>();
-    private int id;
+    private String id;
 
     /**
      * For songs about to add into DB
      * @param id
      */
-    public CombineHash(int id) {
+    public CombineHash(String id) {
         this.id = id;
     }
 
@@ -104,7 +104,7 @@ public class CombineHash {
     /**
      *  generate fingerprint for songs
      */
-    public static ArrayList<Hash> generateFingerprint(File song, int id, int type) throws IOException {
+    public static ArrayList<Hash> generateFingerprint(File song, String id, int type) throws IOException {
     
         // extract PCM data
         PCM16MonoData data = PCM16MonoParser.parse(song,type);

@@ -49,7 +49,7 @@ public class ShazamController {
                 System.out.println("Generating fingerprint for " + song.getName() + " ...");
                 
                 // register a song and get its id.
-                int id = ORMapping.insertSong(song.getName());
+                String id = ORMapping.insertSong(song.getName());
                 System.out.printf("Get id %d\n", id);
                 
                 // generate hashes.
@@ -98,7 +98,7 @@ public class ShazamController {
 
                 System.out.println("Extracting fingerprints ...");
 
-                ArrayList<Hash> hashes = CombineHash.generateFingerprint(f, -1);
+                ArrayList<Hash> hashes = CombineHash.generateFingerprint(song, "", 1);
 
                 System.out.println("Finish extracting fingerprints, start grading");
 

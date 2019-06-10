@@ -63,10 +63,10 @@ public class Grader {
         ArrayList<SongScore> ret = new ArrayList<>();
         
         // iterate each possible song
-        for (Iterator<Map.Entry<Integer, ArrayList<Integer>>> eachSong = stat.entrySet().iterator();
+        for (Iterator<Map.Entry<String, ArrayList<Integer>>> eachSong = stat.entrySet().iterator();
              eachSong.hasNext(); ) {
-            Map.Entry<Integer, ArrayList<Integer>> entry = eachSong.next();
-            Integer song_id = entry.getKey();
+            Map.Entry<String, ArrayList<Integer>> entry = eachSong.next();
+            String song_id = entry.getKey();
             ArrayList<Integer> song_time_diff = entry.getValue();
             
             // convert to a histogram

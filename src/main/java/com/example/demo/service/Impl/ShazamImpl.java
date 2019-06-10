@@ -18,7 +18,7 @@ public class ShazamImpl implements ShazamService{
     private HashMapper hMapper;
 
     @Override
-    public String insertHash(int hashid,String songid,int offset){
+    public String insertHash(int hashid,int songid,int offset){
         Map<String,Object> map = new HashMap<>();
         map.put("hashid",hashid);
         map.put("songid",songid);
