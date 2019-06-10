@@ -256,7 +256,7 @@ public class AdminInterface {
         return adminService.fuzzySingers(singername);
     }
 
-    @GetMapping(value="/api/changeSingerImg")
+    @PostMapping(value="/api/changeSingerImg")
     public String changeSingerImg(@Param("singerid") String singerid,@Param("url") String url){
         return adminService.changeSingerImg(singerid, url);
     }

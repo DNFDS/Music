@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.dao.HashMapper" >
   <resultMap id="HashResultMap" type="com.example.demo.service.Shazam.hash.Hash" >
     <id column="hash_id" property="hash_id" jdbcType="INTEGER" />
-    <id column="song_id" property="song_id" jdbcType="INTEGER" />
+    <id column="song_id" property="song_id" jdbcType="VARCHAR" />
     <id column="offset" property="offset" jdbcType="INTEGER" />
   </resultMap>
    <select id="insertHash" parameterType="java.util.HashMap" statementType="CALLABLE">
