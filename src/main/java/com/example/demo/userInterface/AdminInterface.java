@@ -85,7 +85,8 @@ public class AdminInterface {
     @Param("school") String school,
     @Param("company") String company,
     @Param("age") String age,
-    @Param("adminid") String adminid
+    @Param("adminid") String adminid,
+    @Param("free") String free
     ){
         Song s=new Song();
         s.setAdminid(adminid);
@@ -97,6 +98,7 @@ public class AdminInterface {
         s.setSongid(id);
         s.setSongschool(school);
         s.setSongname(name);
+        s.setFree(free);
         return (String)adminService.addSong(s);
     }
 
@@ -109,7 +111,8 @@ public class AdminInterface {
     @Param("company") String company,
     @Param("age") String age,
     @Param("adminid") String adminid,
-    @Param("singerid") String singerid
+    @Param("singerid") String singerid,
+    @Param("free") String free
     ){
         Album a=new Album();
         a.setAdminid(adminid);
@@ -119,6 +122,7 @@ public class AdminInterface {
         a.setAlbumage(age);
         a.setSingerid(singerid);
         a.setAlbumname(name);
+        a.setFree(free);
         return (String)adminService.addAlbum(a);
     }
 
@@ -216,5 +220,46 @@ public class AdminInterface {
     public String[] getBasicInfo(@Param("aid") String aid){
         return adminService.getBasicInfo(aid);
     }
+
+    @GetMapping(value="/api/getSingerTotal")
+    public int getSingerTotal(){
+        return adminService.getSingerTotal();
+    }
+
+    @GetMapping(value="/api/getAlbumTotal")
+    public int getAlbumTotal(){
+        return adminService.getAlbumTotal();
+    }
+
+    @GetMapping(value="/api/getSongTotal")
+    public int getSongTotal(){
+        return adminService.getSongTotal();
+    }
+
+    @GetMapping(value="/api/getSingers")
+    public ArrayList<Singer> getSingers(@Param("pgnum") int pgnum){
+        return adminService.getSingers(pgnum);
+    }
+
+    @GetMapping(value="/api/getAlbums")
+    public ArrayList<Album> getAlbums(@Param("pgnum") int pgnum){
+        return adminService.getAlbums(pgnum);
+    }
+
+    @GetMapping(value="/api/getSongs")
+    public ArrayList<Song> getSongs(@Param("pgnum") int pgnum){
+        return adminService.getSongs(pgnum);
+    }
+
+    @GetMapping(value="/api/fuzzySingers")
+    public ArrayList<Singer> fuzzySingers(@Param("singername") String singername){
+        return adminService.fuzzySingers(singername);
+    }
+
+    @PostMapping(value="/api/changeSingerImg")
+    public String changeSingerImg(@Param("singerid") String singerid,@Param("url") String url){
+        return adminService.changeSingerImg(singerid, url);
+    }
+
 
 }

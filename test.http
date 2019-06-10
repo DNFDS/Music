@@ -20,6 +20,8 @@ get {{url}}/getUser?id=100001
 get {{url}}/getSongList?id=100001
 
 ###
+get {{url}}/getSongListById?id=4000005
+###
 get {{url}}/showCreatedSongList?id=100001
 
 ###
@@ -27,6 +29,9 @@ get {{url}}/getFavorite?id=100001
 
 ###
 get {{url}}/getSongListSavedNum?songlistid=3000508
+
+###
+get {{url}}/getSongsOfSongList?songlistid=3000001
 
 ###
 get {{url}}/getNumOfSongList?songlistid=3000508
@@ -37,6 +42,9 @@ get {{url}}/createNewSonglist?name=新歌单&userid=100050
 
 ###
 get {{url}}/KeepSongList?userid=100011&songlistid=3000544
+
+###
+get {{url}}/isSonglistSaved?userid=100001&songlistid=3000536
 
 
 
@@ -58,6 +66,9 @@ get {{url}}/isFollowedSinger?uid=100001&sid=200000
 
 ###
 get {{url}}/changeFollowSinger?uid=100001&sid=200000
+
+###
+get {{url}}/getSongAndAlbumOfSinger?singerid=200000&userid=
 
 #################### about friend
 ###
@@ -114,6 +125,8 @@ get {{url}}/KeepSong?songlistid=1555555&songid=4000000
 ###
 get {{url}}/getSong?songid=4000000
 
-
 ###
 get {{url}}//buildSong
+
+###
+get {{url}}/isSongBought?songid=4000000&albumid=1000000&userid=100001

@@ -33,11 +33,20 @@ public class SongListInterface {
     public Object getSongListSavedNum(@Param("songlistid") String songlistid){
         return songListService.getSongListSavedNum(songlistid).getObject();
     }
-
+    @GetMapping(value="/api/getSongListById")
+    public SongList getSongListById(@Param("songListId") String songListId){
+        return songListService.getSongListById(songListId);
+    }
     @GetMapping(value = "/api/getNumOfSongList")
     public Object getNumOfSongList(@Param("songlistid") String songlistid){
         ArrayList<Song> songs = (ArrayList<Song>)songListService.getSongsInSongList(songlistid).getObject();
         return songs.size();
+    }
+
+    @GetMapping(value = "/api/getSongsOfSongList")
+    public Object getSongsOfSongList(@Param("songlistid") String songlistid){
+        ArrayList<Song> songs = (ArrayList<Song>)songListService.getSongsInSongList(songlistid).getObject();
+        return songs;
     }
 
     @GetMapping(value = "/api/showCreatedSongList")
@@ -46,7 +55,6 @@ public class SongListInterface {
         //list页面，要额外添加歌单的收藏数和曲目数
         return userService.getCreatedSongList(id);
     }
-
     @GetMapping(value = "/api/KeepSongList")
     public ResultEntity KeepSongList(@Param("userid")String userid, @Param("songlistid")String songlistid){
         String result = keepService.KeepSongList(songlistid,userid);
@@ -57,7 +65,30 @@ public class SongListInterface {
         }
         return new ResultEntity(succ,"收藏成功",null);
     }
-
+    @RequestMapping(value="/api/keepSongListPost", method = RequestMethod.POST)
+    public Boolean KeepSongListPost(@Param("userId") String userId, @Param("songListId") String songListId,
+                                         HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        System.out.println(userId+songListId);
+        boolean succ = true;
+        String result = keepService.KeepSongList(songListId, userId);
+        //失败
+        if(result.equals("0")){
+            succ = false;
+        }
+        return succ;
+    }
+    @RequestMapping(value="/api/cancelKeepSongList", method = RequestMethod.POST)
+    public Boolean CancelKeepSongList(@Param("userId") String userId, @Param("songListId") String songListId,
+                                      HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin","*");
+        boolean succ = true;
+        String result = keepService.unKeepSongList(songListId, userId);
+        if(result.equals("0")){
+            succ = false;
+        }
+        return succ;
+    }
     @GetMapping(value = "/api/createNewSonglist")
     public String createNewSonglist(@Param("name")String name, @Param("userid") String userid) {
         String id = songListService.createNewSongList(name,null,null,userid);
@@ -90,5 +121,10 @@ public class SongListInterface {
         map.put("songlists",createdsonglist);
         map.put("toAdd",songid);
         return new ModelAndView("temp/songListChooser",map);
+    }
+
+    @GetMapping(value = "/api/isSonglistSaved")
+    public String isSonglistSaved(@Param("userid") String userid,@Param("songlistid") String songlistid){
+        return songListService.isSonglistSaved(userid, songlistid);
     }
 }

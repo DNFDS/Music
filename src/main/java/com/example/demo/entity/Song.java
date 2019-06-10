@@ -29,6 +29,22 @@ public class Song {
 
     private String adminid;
 
+    private String free;
+
+    private String singer;
+
+    private String lyric;
+
+    private String singerID;
+
+    public String getFree(){
+        return free;
+    }
+
+    public void setFree(String free){
+        this.free=free;
+    }
+
     public String getAdminid(){
         return adminid;
     }
@@ -131,5 +147,29 @@ public class Song {
 
     public void setSavenum(BigDecimal savenum) {
         this.savenum = savenum;
+    }
+
+    public String getSinger() {
+        return singer;
+    }
+
+    public void setSinger(String singer) {
+        this.singer = singer;
+    }
+
+    public String getLyric() {
+        return lyric;
+    }
+
+    public void setLyric(String lyric) {
+        this.lyric = lyric;
+    }
+
+    public String getSingerID() {
+        return singerID;
+    }
+
+    public void setSingerID(String singerID) {
+        this.singerID = singerID;
     }
 }

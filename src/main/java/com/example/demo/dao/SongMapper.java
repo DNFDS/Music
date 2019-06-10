@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.Song;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
 
@@ -67,4 +68,6 @@ public interface SongMapper {
      * @OUT: "songs"> ArrayList<Song>
      */
     void getPushSong(Map<String, Object> Map);
+
+    Integer addSong(@Param("song")Song song);
 }

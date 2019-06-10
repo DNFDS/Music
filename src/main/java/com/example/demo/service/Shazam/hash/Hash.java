@@ -6,6 +6,7 @@ public class Hash {
     public int dt;       // the time difference between two frequency peaks
     public int offset;     // the offset to the beginning of music
     public int song_id;    // the name of the song
+    public int hash_id;
     
     public Hash() {
         

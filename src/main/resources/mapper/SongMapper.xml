@@ -14,6 +14,7 @@
     <result column="SONGSCHOOL" property="songschool" jdbcType="VARCHAR" />
     <result column="SONGAGE" property="songage" jdbcType="VARCHAR" />
     <result column="ADMINID" property="adminid" jdbcType="VARCHAR" />
+    <result column="FREE" property="free" jdbcType="VARCHAR" />
   </resultMap>
   <select id="getSongById" parameterType="java.util.HashMap" statementType="CALLABLE">
     call SONG_PKG.search_song_by_song_id(#{songid,mode=IN,jdbcType=VARCHAR},#{songs,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=SongResultMap})
@@ -42,4 +43,10 @@
   <select id="getPushSong" parameterType="java.util.HashMap" statementType="CALLABLE">
   call PUSHSONG_PKG.pushsong(#{userid,mode=IN,jdbcType=VARCHAR},#{songs,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=SongResultMap})
   </select>
+  <insert id="addSong" useGeneratedKeys="true" keyProperty="songid">
+INSERT INTO SONG
+(SONGID,SONGPATH,SONGNAME,SONGIMAGE,LENGTH,PLAYTIMES,ALBUMID,SONGSCHOOL,SONGAGE,COMPANY,LANGUAGE,SAVENUM,ADMINID,FREE,LYRIC,SINGER)
+VALUES
+(#{song.songid},#{song.songpath},#{song.songname},#{song.songimage},#{song.length},#{song.playtimes},#{song.albumid},#{song.songschool},#{song.songage},#{song.company},#{song.language},#{song.savenum},#{song.adminid},#{song.free},#{song.lyric},#{song.singer})
+  </insert>
 </mapper>

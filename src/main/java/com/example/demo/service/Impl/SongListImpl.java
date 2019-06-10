@@ -44,6 +44,10 @@ public class SongListImpl implements SongListService {
         map.put("songlistid",songlistid);
         songListMapper.getSongsInSongList(map);
         ArrayList<Song> songs = (ArrayList<Song>)map.get("songs");
+        System.out.println(songlistid);
+        for(int i=0; i<songs.size(); i++){
+
+        }
         return new ResultEntity(true,"",songs);
     }
 
@@ -140,5 +144,13 @@ public class SongListImpl implements SongListService {
         map.put("songlistid",songlistid);
         songListMapper.deleteSongFromSongList(map);
         return true;
+    }
+
+    public String isSonglistSaved(String userid,String songlistid){
+        Map<String,Object> map = new HashMap<>();
+        map.put("userid",userid);
+        map.put("songlistid",songlistid);
+        songListMapper.isSonglistSaved(map);
+        return (String)map.get("saved");
     }
 }

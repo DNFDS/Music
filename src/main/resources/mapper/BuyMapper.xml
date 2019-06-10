@@ -22,5 +22,8 @@
   <select id="getBoughtAlbums" parameterType="java.util.HashMap" statementType="CALLABLE">
     call USER_PKG.get_buy_albums(#{userid,mode=IN,jdbcType=VARCHAR},#{albums,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=AlbumResultMap})
   </select>
+  <select id="isMusicBought" parameterType="java.util.HashMap" statementType="CALLABLE">
+    call SONG_PKG.is_song_bought(#{musicid,mode=IN,jdbcType=VARCHAR},#{userid,mode=IN,jdbcType=VARCHAR},#{bought,mode=OUT,jdbcType=VARCHAR})
+  </select>
   
 </mapper>

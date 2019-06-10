@@ -94,6 +94,7 @@ public class AdminImpl implements AdminService {
         map.put("company",s.getCompany());
         map.put("adminid",s.getAdminid());
         map.put("albumid", s.getAlbumid());
+        map.put("free",s.getFree());
         adminMapper.addSong(map);
         return (String)map.get("succ");
     }
@@ -108,6 +109,7 @@ public class AdminImpl implements AdminService {
         map.put("company",a.getCompany());
         map.put("adminid",a.getAdminid());
         map.put("singerid", a.getSingerid());
+        map.put("free",a.getFree());
         adminMapper.addAlbum(map);
         return (String)map.get("succ");
     }
@@ -268,6 +270,68 @@ public class AdminImpl implements AdminService {
         map.put("adminid",aid);
         adminMapper.getBasicInfo(map);
         return ((String)map.get("info")).split("/",7);
+    }
+
+    @Override
+    public int getSingerTotal(){
+        Map<String,Object> map = new HashMap<>();
+        adminMapper.getSingerTotal(map);
+        return (int)map.get("cnt");
+    }
+
+    @Override
+	public int getAlbumTotal(){
+        Map<String,Object> map = new HashMap<>();
+        adminMapper.getAlbumTotal(map);
+        return (int)map.get("cnt");
+    }
+
+    @Override
+	public int getSongTotal(){
+        Map<String,Object> map = new HashMap<>();
+        adminMapper.getAlbumTotal(map);
+        return (int)map.get("cnt");
+    }
+
+    @Override
+	public ArrayList<Singer> getSingers(int pgnum){
+        Map<String,Object> map = new HashMap<>();
+        map.put("pgnum",pgnum);
+        adminMapper.getSingers(map);
+        return (ArrayList<Singer>)map.get("singers");
+    }
+
+    @Override
+	public ArrayList<Album> getAlbums(int pgnum){
+        Map<String,Object> map = new HashMap<>();
+        map.put("pgnum",pgnum);
+        adminMapper.getAlbums(map);
+        return (ArrayList<Album>)map.get("albums");
+    }
+
+    @Override
+	public ArrayList<Song> getSongs(int pgnum){
+        Map<String,Object> map = new HashMap<>();
+        map.put("pgnum",pgnum);
+        adminMapper.getSongs(map);
+        return (ArrayList<Song>)map.get("songs");
+    }
+
+    @Override
+    public ArrayList<Singer> fuzzySingers(String singername){
+        Map<String,Object> map=new HashMap<>();
+        map.put("singername",singername);
+        adminMapper.fuzzySingers(map);
+        return (ArrayList<Singer>)map.get("singers");
+    }
+
+    @Override
+    public String changeSingerImg(String singerid,String url){
+        Map<String,Object> map=new HashMap<>();
+        map.put("singerid",singerid);
+        map.put("url",url);
+        adminMapper.changeSingerImg(map);
+        return (String)map.get("succ");
     }
 
 }

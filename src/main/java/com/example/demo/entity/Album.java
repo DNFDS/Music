@@ -17,6 +17,16 @@ public class Album {
 
     private String adminid;
 
+    private String free;
+
+    public String getFree(){
+        return free;
+    }
+
+    public void setFree(String free){
+        this.free=free;
+    }
+
     public String getAdminid(){
         return adminid;
     }

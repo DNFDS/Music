@@ -15,4 +15,5 @@ public interface SongService {
     ResultEntity getBoughtSongByUserId(String userid);
     Song getSongById(String songid);
     boolean commentSong(String words,String songid,String userid);
+	String isSongBought(String songid, String albumid, String userid);
 }

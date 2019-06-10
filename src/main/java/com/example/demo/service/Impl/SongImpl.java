@@ -3,6 +3,7 @@ package com.example.demo.service.Impl;
 import com.example.demo.dao.AlbumMapper;
 import com.example.demo.dao.BuyMapper;
 import com.example.demo.dao.SongMapper;
+import com.example.demo.dao.UserMapper;
 import com.example.demo.dao.CommentsMapper;
 import com.example.demo.entity.*;
 import com.example.demo.entity.result.ResultEntity;
@@ -22,6 +23,8 @@ public class SongImpl implements SongService {
     private BuyMapper buyMapper;
     @Resource
     private CommentsMapper commentsMapper;
+    @Resource
+    private UserMapper uMapper;
 
     @Override
     public ResultEntity getSingersInSong(String songid){
@@ -111,6 +114,29 @@ public class SongImpl implements SongService {
         songMapper.songPlaytimesPlus(map);
         String succ = (String)map.get("succ");
         return succ.equals("1");
+    }
+
+    public String isSongBought(String songid, String albumid, String userid){
+        Map<String,Object> umap = new HashMap<>();
+        umap.put("userid",userid);
+        uMapper.getUserById(umap);
+        User u = ((ArrayList<User>)umap.get("result")).get(0);
+        if(u.getIsvip().equals("1")){
+            return "2";
+        }
+        else{
+        Map<String,Object> map = new HashMap<>();
+        map.put("musicid",songid);
+        map.put("userid",userid);
+        buyMapper.isMusicBought(map);
+        String sb=(String)map.get("bought");
+        map.remove("musicid");
+        map.put("musicid",albumid);
+        buyMapper.isMusicBought(map);
+        String ab=(String)map.get("bought");
+        String s=(sb.equals("1")||ab.equals("1"))?"1":"0";
+        return s;
+        }
     }
 
 }
