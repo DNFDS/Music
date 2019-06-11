@@ -65,8 +65,8 @@ public class ShazamController {
                 hashes = null;
                 System.gc();
 
-                System.out.print("Building index ...");
-                ORMapping.buildIndex();
+                // System.out.print("Building index ...");
+                // ORMapping.buildIndex();
                 
                 long song_end = System.currentTimeMillis();
                 System.out.printf("Finish generating fingerprints, time elapsed : %.2f!\n==============\n", (song_end-song_start)/1000.0);
