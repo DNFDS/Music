@@ -49,7 +49,7 @@ public class ShazamController {
                 System.out.println("Generating fingerprint for " + song.getName() + " ...");
                 
                 // register a song and get its id.
-                String id = ORMapping.insertSong(song.getName());
+                String id = String.valueOf(ORMapping.insertSong(song.getName()));
                 System.out.printf("Get id %d\n", id);
                 
                 // generate hashes.
