@@ -49,10 +49,10 @@ public class ShazamImpl implements ShazamService{
     }
 
     @Override
-    public int insertSong(String songName){
+    public String insertSong(String songName){
         Map<String,Object> map = new HashMap<>();
         map.put("songname",songName);
         hMapper.insertSong(map);
-        return Integer.parseInt(map.get("songid").toString());
+        return map.get("songid").toString();
     }
 }
