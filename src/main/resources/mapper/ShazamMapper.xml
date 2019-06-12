@@ -10,7 +10,7 @@
     call SHAZAM_PKG.insert_hash(#{hashid,mode=IN,jdbcType=INTEGER},#{songid,mode=IN,jdbcType=INTEGER},#{offset,mode=IN,jdbcType=INTEGER},#{succ,mode=OUT,jdbcType=VARCHAR})
   </select>
   <select id="buildIndex" statementType="CALLABLE">
-    call SHAZAM_PKG.build_index
+    call SHAZAM_PKG.build_index()
   </select>
   <select id="getSongName" parameterType="java.util.HashMap" statementType="CALLABLE">
     call SHAZAM_PKG.get_song_name(#{songid,mode=IN,jdbcType=VARCHAR},#{songname,mode=OUT,jdbcType=VARCHAR})
