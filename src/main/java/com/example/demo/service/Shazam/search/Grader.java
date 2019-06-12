@@ -34,11 +34,15 @@ public class Grader {
                 return o1.getHashID() - o2.getHashID();
             }
         });
+
+        System.out.println("hashs length" + String.valueOf(targetHashes.size()));
+        System.out.println("sort finished");
         
         Statistics statistics = new Statistics();
         
         int last_hash_id = -1;
         int current_hash_id;
+        int count = 0;
         List<Hash> matchingHashes = null;
         for (Hash targetHash : targetHashes) {
             current_hash_id = targetHash.getHashID();
@@ -48,6 +52,7 @@ public class Grader {
             }
             // update last_hash_id
             last_hash_id = current_hash_id;
+            System.out.println("current count "+String.valueOf(count++));
             for (Hash matchingHash : matchingHashes) {
                 // if the song entry does not exist, create one
                 if (!statistics.containsKey(matchingHash.song_id)) {
@@ -58,6 +63,7 @@ public class Grader {
             }
         }
         matchingHashes = null;
+        System.out.println("gather finished");
         return statistics;
     }
     

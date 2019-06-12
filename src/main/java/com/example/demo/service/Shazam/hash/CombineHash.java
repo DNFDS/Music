@@ -133,7 +133,8 @@ public class CombineHash {
         ArrayList<Hash> hashes = map.combine();
         data = null;
         map = null;
-    
+        
+        System.out.println("generateFingerprint done");
         return hashes;
     }
 }
