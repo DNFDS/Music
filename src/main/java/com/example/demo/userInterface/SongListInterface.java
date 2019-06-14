@@ -34,8 +34,8 @@ public class SongListInterface {
         return songListService.getSongListSavedNum(songlistid).getObject();
     }
     @GetMapping(value="/api/getSongListById")
-    public SongList getSongListById(@Param("songListId") String songListId){
-        return songListService.getSongListById(songListId);
+    public SongList getSongListById(@Param("id") String id){
+        return songListService.getSongListById(id);
     }
     @GetMapping(value = "/api/getNumOfSongList")
     public Object getNumOfSongList(@Param("songlistid") String songlistid){
@@ -78,12 +78,11 @@ public class SongListInterface {
         }
         return succ;
     }
-    @RequestMapping(value="/api/cancelKeepSongList", method = RequestMethod.POST)
-    public Boolean CancelKeepSongList(@Param("userId") String userId, @Param("songListId") String songListId,
-                                      HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin","*");
+    @RequestMapping(value="/api/cancelKeepSongList", method = RequestMethod.GET)
+    public Boolean CancelKeepSongList(@Param("userid") String userid, @Param("songlistid") String songlistid){
         boolean succ = true;
-        String result = keepService.unKeepSongList(songListId, userId);
+        System.out.println(userid + ' ' + songlistid);
+        String result = keepService.unKeepSongList(songlistid, userid);
         if(result.equals("0")){
             succ = false;
         }
