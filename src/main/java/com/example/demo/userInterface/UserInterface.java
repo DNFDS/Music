@@ -1,9 +1,15 @@
 package com.example.demo.userInterface;
 
+import com.example.demo.entity.Album;
 import com.example.demo.entity.Singer;
+import com.example.demo.entity.Song;
+import com.example.demo.entity.SongList;
 import com.example.demo.entity.User;
 import com.example.demo.entity.result.ResultEntity;
+import com.example.demo.service.AlbumService;
 import com.example.demo.service.SingerService;
+import com.example.demo.service.SongListService;
+import com.example.demo.service.SongService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.AutoShowUtil;
 
@@ -20,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @CrossOrigin
@@ -32,6 +39,40 @@ public class UserInterface {
     private SingerService singerService;
     @Autowired
     private AutoShowUtil showUtil;
+    @Autowired
+    private SongListService songListService;
+    @Autowired
+    private SongService songService;
+    @Autowired
+    private AlbumService albumService;
+    @GetMapping(value = "/api/recommend")
+    public Map findMusic(@Param("userid") String userid){
+        if(userid == "") {
+            userid = "100001";
+        }
+        System.out.println(userid);
+        Map<String, Object>map = new HashMap<>();
+        ArrayList<Song> songs = songService.getCommandSong(userid);
+        ArrayList<SongList> songLists = songListService.getCommandSongList(userid);
+        ArrayList<Album> albums = albumService.getCommandAlbum(userid);
+        if(songs.size()>5){
+            map.put("songs",songs.subList(10,15));
+        }
+        else
+            map.put("songs",songs);
+        if(songLists.size()>5){
+            map.put("songlists",songLists.subList(0,5));
+        }
+        else
+            map.put("songlists",songLists);
+        if(albums.size()>5){
+            map.put("albums",albums.subList(0,5));
+        }
+        else
+            map.put("albums",albums);
+
+        return map;
+    }
 
     @GetMapping(value = "/api/getUser")
     public Object getUser(@Param("id") String id) {

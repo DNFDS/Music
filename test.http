@@ -7,6 +7,9 @@
 get {{url}}/getFans?id=100001
 
 ###
+get {{url}}/recommend?userid=100005
+
+###
 get {{url}}/getFriends?id=100001
 
 ###
@@ -130,7 +133,7 @@ get {{url}}/KeepSong?songlistid=100002&songid=94238
 get {{url}}/unKeepSong?songlistid=100002&songid=94238
 
 ###
-get {{url}}/getSong?songid=6802909
+get {{url}}/getSong?songid=94238
 
 ###
 get {{url}}//buildSong
