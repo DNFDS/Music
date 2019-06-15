@@ -58,5 +58,21 @@ public interface AdminService {
 
 	String[] getBasicInfo(String aid);
 
+	int getSingerTotal();
+
+	int getAlbumTotal();
+
+	int getSongTotal();
+
+	ArrayList<Singer> getSingers(int pgnum);
+
+	ArrayList<Album> getAlbums(int pgnum);
+
+	ArrayList<Song> getSongs(int pgnum);
+
+	ArrayList<Singer> fuzzySingers(String singername);
+
+	String changeSingerImg(String singerid,String url);
+
 }
 

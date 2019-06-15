@@ -8,6 +8,7 @@ import com.example.demo.util.AutoShowUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +38,7 @@ public class DetailController {
     @Autowired
     private PlayerService playerService;
 
+    @CrossOrigin
     @ResponseBody
     @RequestMapping(value ="/api/getSongAndAlbumOfSinger",method = RequestMethod.GET)
     public Object singerDetail(@RequestParam("singerid") String singerid, @RequestParam("userid") String userid){
@@ -48,6 +50,7 @@ public class DetailController {
         }else {
             map.put("songs",songs);
         }
+        Singer singer = singerService.getSingerById(singerid);
         ArrayList<Album> albums = singerService.getSingerAlbum(singerid);
         Boolean isfollow = false;
         if (userid != null && !userid.isEmpty()) {
@@ -56,6 +59,7 @@ public class DetailController {
         map.put("isfollow",isfollow);
         map.put("albumNum",albums.size());
         map.put("songNum", songs.size());
+        map.put("singer", singer);
         return map;
     }
 

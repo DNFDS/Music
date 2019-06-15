@@ -7,6 +7,9 @@
 get {{url}}/getFans?id=100001
 
 ###
+get {{url}}/recommend?userid=100005
+
+###
 get {{url}}/getFriends?id=100001
 
 ###
@@ -20,7 +23,7 @@ get {{url}}/getUser?id=100001
 get {{url}}/getSongList?id=100001
 
 ###
-get {{url}}/getSongListById?id=4000005
+get {{url}}/getSongListById?id=3000555
 ###
 get {{url}}/showCreatedSongList?id=100001
 
@@ -42,6 +45,10 @@ get {{url}}/createNewSonglist?name=新歌单&userid=100050
 
 ###
 get {{url}}/KeepSongList?userid=100011&songlistid=3000544
+
+###
+get {{url}}/cancelKeepSongList?userid=100011&songlistid=3000544
+
 
 ###
 get {{url}}/isSonglistSaved?userid=100001&songlistid=3000536
@@ -120,11 +127,16 @@ get {{url}}/searchSinger?word=王
 get {{url}}/favoriteSong?userid=100001&songid=4000000
 
 ###
-get {{url}}/KeepSong?songlistid=1555555&songid=4000000
+get {{url}}/KeepSong?songlistid=100002&songid=94238
 
 ###
-get {{url}}/getSong?songid=4000000
+get {{url}}/unKeepSong?songlistid=100002&songid=94238
 
+###
+get {{url}}/getSong?songid=94238
 
 ###
 get {{url}}//buildSong
+
+###
+get {{url}}/isSongBought?songid=4000000&albumid=1000000&userid=100001
