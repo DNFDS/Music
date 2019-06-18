@@ -44,9 +44,9 @@
   call PUSHSONG_PKG.pushsong(#{userid,mode=IN,jdbcType=VARCHAR},#{songs,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=SongResultMap})
   </select>
   <insert id="addSong" useGeneratedKeys="true" keyProperty="songid">
-INSERT INTO SONG
-(SONGID,SONGPATH,SONGNAME,SONGIMAGE,LENGTH,PLAYTIMES,ALBUMID,SONGSCHOOL,SONGAGE,COMPANY,LANGUAGE,SAVENUM,ADMINID,FREE,LYRIC,SINGER)
-VALUES
-(#{song.songid},#{song.songpath},#{song.songname},#{song.songimage},#{song.length},#{song.playtimes},#{song.albumid},#{song.songschool},#{song.songage},#{song.company},#{song.language},#{song.savenum},#{song.adminid},#{song.free},#{song.lyric},#{song.singer})
+      INSERT INTO SONG
+      (SONGID,SONGPATH,SONGNAME,SONGIMAGE,LENGTH,PLAYTIMES,ALBUMID,SONGSCHOOL,SONGAGE,COMPANY,LANGUAGE,SAVENUM,ADMINID,FREE,LYRIC,SINGER,SINGERID)
+      VALUES
+      (#{song.songid},#{song.songpath},#{song.songname},#{song.songimage},#{song.length},#{song.playtimes},#{song.albumid},#{song.songschool},#{song.songage},#{song.company},#{song.language},#{song.savenum},#{song.adminid},#{song.free},#{song.lyric},#{song.singer},#{song.singerID})      
   </insert>
 </mapper>
