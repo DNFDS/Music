@@ -90,12 +90,14 @@ public class ShazamController {
      * 验证音频文件
     */
     @PostMapping("/searchSong")
-    public int searchSong(@RequestParam("file") MultipartFile file) {
-        
-        if (file.isEmpty()) {
-            throw new RuntimeException("上传文件不能为空");
-        }
+    public Object searchSong(@RequestParam("file") MultipartFile file) {
+        // if (file.isEmpty()) {
+        //     // return null;
+        //     throw new RuntimeException("上传文件不能为空");
+            
+        // }
         // 格式转换
+        ArrayList<SongScore> scores = null;
         try{
             File song = ShazamController.multipartToFile(file, file.getOriginalFilename());
             if (song != null) {
@@ -108,8 +110,7 @@ public class ShazamController {
                 System.out.println("Finish extracting fingerprints, start grading");
 
                 // call the grading module
-                ArrayList<SongScore> scores = grader.grade(hashes);
-
+                scores = grader.grade(hashes);
                 for (int i=0; i<5 && i<scores.size(); ++i) {
                     System.out.println(scores.get(i));
                 }
@@ -117,16 +118,18 @@ public class ShazamController {
                 long end = System.currentTimeMillis();
 
                 System.out.printf("Time elapsed %.2f sec.\n", (end-start)/1000.0);
+                return scores;
             }
         }
         catch(Exception e){
             e.printStackTrace();
-            return -1;
         }
-        
-        return 1;
-
+        finally {
+            return scores;
+        }
+            
     }
+        
 
     @GetMapping("/testupload")
     public String index() {
