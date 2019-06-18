@@ -90,6 +90,17 @@ public class SongInterface {
         return new ResultEntity(succ,"保存成功",null);
     }
 
+    @GetMapping(value = "/api/unKeepSong")
+    public ResultEntity unKeepSong(@Param("songlistid")String songlistid, @Param("songid")String songid){
+        String result = keepService.unKeepSong(songid,songlistid);
+        boolean succ = true;
+        if(result.equals("0")){
+            succ = false;
+            return new ResultEntity(succ,"取消保存失败",null);
+        }
+        return new ResultEntity(succ,"取消保存成功",null);
+    }
+
     @RequestMapping(value="/api/commentSong", method = RequestMethod.POST)
     public boolean commentSong(@RequestParam("songID") String songID, @RequestParam("userID") String userID,
                                @RequestParam("commentText") String commentText, HttpServletResponse response){
