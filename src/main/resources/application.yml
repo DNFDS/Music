@@ -5,7 +5,7 @@ spring:
   datasource:
     url: jdbc:oracle:thin:@111.230.63.192:1521:orcl
     username: music
-    password: music
+    password: Music2019
     driver-class-name: oracle.jdbc.driver.OracleDriver
   servlet:
     multipart:
