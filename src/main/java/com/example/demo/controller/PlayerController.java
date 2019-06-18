@@ -236,7 +236,7 @@ public class PlayerController
             request.getSession().setAttribute("playList_mode",temp);
         }
     }
-    @RequestMapping(value = "/getSongByID",method = RequestMethod.POST)
+    @RequestMapping(value = "/api/getSongByID",method = RequestMethod.POST)
     @ResponseBody
     public Song getSongByID(@Param("songID")String songID)
     {
