@@ -1,20 +1,17 @@
 package com.example.demo.service.Impl;
 
-import com.example.demo.dao.AlbumMapper;
-import com.example.demo.dao.SingerMapper;
-import com.example.demo.dao.SongListMapper;
-import com.example.demo.dao.SongMapper;
-import com.example.demo.entity.Album;
-import com.example.demo.entity.Singer;
-import com.example.demo.entity.Song;
-import com.example.demo.entity.SongList;
+import com.example.demo.dao.*;
+import com.example.demo.entity.*;
 import com.example.demo.service.PlayerService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -28,10 +25,13 @@ public class PlayerImpl implements PlayerService
     private AlbumMapper albumMapper;
     @Resource
     private SingerMapper singerMapper;
+    @Resource
+    private HistoryMapper historyMapper;
 
     @Override
     public Song getSongByID(Map<String, Object> Map)
     {
+        System.out.println(Map);
         songMapper.getSongById(Map);
         ArrayList<Song> temp=(ArrayList<Song>) Map.get("songs");
         return temp.get(0);
@@ -138,5 +138,46 @@ public class PlayerImpl implements PlayerService
         }
 
         return result+result1+result2;
+    }
+
+    @Override
+    public Integer addUserHistory(String userID, String singerID)
+    {
+        Integer result=0;
+        History history=historyMapper.getHistoryByUserAndSinger(userID,singerID);
+        if (history==null)
+            result=historyMapper.addUserHistory(userID,singerID);
+        else
+            result=historyMapper.updateHistory(userID,singerID);
+        return result;
+    }
+
+    @Override
+    public String[] getRecommendSingers(String userID)throws Exception
+    {
+        List<History>history=historyMapper.getAllHistory();
+        String userList="";
+        String singerList="";
+        String numList="";
+        for(History i:history)
+        {
+            userList+=(i.getUserID()+",");
+            singerList+=(i.getSingerID()+",");
+            numList+=(i.getNum().toString()+",");
+        }
+        String[] recSingers=getRecomSingers(userList,singerList,numList,userID);
+        return recSingers;
+    }
+    public String[] getRecomSingers(String userList,String singerList,String numList,String userID)throws Exception
+    {
+        //设置命令行传入的参数
+        String[] arg = new String[]{"untitled1/venv/bin/python", "untitled1/recommend.py",userList,singerList,numList,userID};
+        Process pr = Runtime.getRuntime().exec(arg);
+        BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        String line=in.readLine();
+        in.close();
+        pr.waitFor();
+        line=line!=null?line:"";
+        return line.split(",");
     }
 }
