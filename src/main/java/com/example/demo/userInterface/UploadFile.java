@@ -38,7 +38,7 @@ public class UploadFile {
      * @return
      */
 
-    @PostMapping(value = "/uploadfile")
+    @PostMapping(value = "/uploadSingerImg")
     public Object Upload(@Param(value = "file") MultipartFile file){
         // 1 初始化用户身份信息(secretId, secretKey)
         COSCredentials cred = new BasicCOSCredentials("AKID6yd3LRevHOmwqaznJacbMsWw78uR4T1S", "LSLyMdhYEfroX5YtCFJ8iGfz4tDRWWZO");
@@ -56,7 +56,7 @@ public class UploadFile {
             localFile = File.createTempFile("temp",null);
             file.transferTo(localFile);
             // 指定要上传到 COS 上的路径
-            String key = "images/"+file.getName();
+            String key = "images/singers/"+file.getOriginalFilename();
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
             PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest);
             return putObjectRequest.getKey();

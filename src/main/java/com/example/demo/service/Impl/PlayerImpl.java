@@ -70,6 +70,13 @@ public class PlayerImpl implements PlayerService
 
     @Override
     public Integer addSong(String songID,String path, String name, String image, String length, String albumID,String albumName, String singer, String lrc,String singerID) {
+        Map<String,Object>tempSongMap=new HashMap<>();
+        tempSongMap.put("songid",songID);
+        songMapper.getSongById(tempSongMap);
+        ArrayList<Song>tempSongList=(ArrayList<Song>) tempSongMap.get("songs");
+        if (tempSongList.size()!=0)
+            return -1;
+
         Song song=new Song();
         song.setAlbumid(albumID!=null?albumID:"-1");
         song.setAdminid("1002");
