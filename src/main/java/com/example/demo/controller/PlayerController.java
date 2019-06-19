@@ -5,11 +5,7 @@ import com.example.demo.service.PlayerService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -236,7 +232,7 @@ public class PlayerController
             request.getSession().setAttribute("playList_mode",temp);
         }
     }
-    @RequestMapping(value = "/getSongByID",method = RequestMethod.POST)
+    @RequestMapping(value = "/api/getSongByID",method = RequestMethod.POST)
     @ResponseBody
     public Song getSongByID(@Param("songID")String songID)
     {
@@ -267,5 +263,17 @@ public class PlayerController
         }
         return songList;
     }*/
+    @GetMapping(value = "/api/getUserRecommend")
+    @ResponseBody
+    public Object getUserRecommend(String userID)throws Exception{
+        Map tempMap=new HashMap();
+        tempMap.put("recommend",playerService.getRecommendSingers(userID));
+        return tempMap;
+    }
+    @PostMapping(value = "/api/addUserHistory")
+    @ResponseBody
+    public Object add(String userID,String singerID){
+        return playerService.addUserHistory(userID,singerID);
+    }
 
 }
