@@ -171,7 +171,7 @@ public class PlayerImpl implements PlayerService
     public String[] getRecomSingers(String userList,String singerList,String numList,String userID)throws Exception
     {
         //设置命令行传入的参数
-        String[] arg = new String[]{"untitled1/venv/bin/python", "untitled1/recommend.py",userList,singerList,numList,userID,"4"};
+        String[] arg = new String[]{"untitled1/venv/bin/python", "untitled1/recommend.py",userList,singerList,numList,userID,"5"};
         Process pr = Runtime.getRuntime().exec(arg);
         BufferedReader in = new BufferedReader(new InputStreamReader(pr.getInputStream()));
         String line=in.readLine();
