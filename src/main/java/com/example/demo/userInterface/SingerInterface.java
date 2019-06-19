@@ -61,4 +61,9 @@ public class SingerInterface {
         String id = request.getParameter("id");
         return showUtil.changeFollowSinger(my.getUserid(),id);
     }
+
+    @GetMapping(value="/api/getSingerAlbums")
+    public Object getSingerAlbums(@Param("singerid") String singerid){
+        return singerService.getSingerAlbum(singerid);
+    }
 }

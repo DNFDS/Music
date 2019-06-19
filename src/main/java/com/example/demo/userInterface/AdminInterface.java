@@ -86,7 +86,10 @@ public class AdminInterface {
     @Param("company") String company,
     @Param("age") String age,
     @Param("adminid") String adminid,
-    @Param("free") String free
+    @Param("free") String free,
+    @Param("songpath") String songpath,
+    @Param("songimg") String songimg,
+    @Param("singername") String singername
     ){
         Song s=new Song();
         s.setAdminid(adminid);
@@ -99,6 +102,9 @@ public class AdminInterface {
         s.setSongschool(school);
         s.setSongname(name);
         s.setFree(free);
+        s.setSongpath(songpath);
+        s.setSongimage(songimg);
+        s.setSinger(singername);
         return (String)adminService.addSong(s);
     }
 
@@ -112,7 +118,8 @@ public class AdminInterface {
     @Param("age") String age,
     @Param("adminid") String adminid,
     @Param("singerid") String singerid,
-    @Param("free") String free
+    @Param("free") String free,
+    @Param("albumimg") String albumimg
     ){
         Album a=new Album();
         a.setAdminid(adminid);
@@ -123,6 +130,7 @@ public class AdminInterface {
         a.setSingerid(singerid);
         a.setAlbumname(name);
         a.setFree(free);
+        a.setAlbumimage(albumimg);
         return (String)adminService.addAlbum(a);
     }
 
@@ -133,7 +141,8 @@ public class AdminInterface {
     @Param("sex") String sex,
     @Param("region") String region,
     @Param("intro") String intro,
-    @Param("adminid") String adminid
+    @Param("adminid") String adminid,
+    @Param("singerimg") String singerimg
     ){
         Singer s = new Singer();
         s.setSingerid(id);
@@ -142,6 +151,7 @@ public class AdminInterface {
         s.setRegion(region);
         s.setIntroduction(intro);
         s.setAdminid(adminid);
+        s.setSingerimage(singerimg);
         return (String)adminService.addSinger(s);
     }
 
@@ -259,6 +269,26 @@ public class AdminInterface {
     @PostMapping(value="/api/changeSingerImg")
     public String changeSingerImg(@Param("singerid") String singerid,@Param("url") String url){
         return adminService.changeSingerImg(singerid, url);
+    }
+
+    @GetMapping(value="/api/fuzzyAlbums")
+    public ArrayList<Album> fuzzyAlbums(@Param("albumname") String albumname){
+        return adminService.fuzzyAlbums(albumname);
+    }
+
+    @GetMapping(value="/api/fuzzySongs")
+    public ArrayList<Song> fuzzySongs(@Param("songname") String songname){
+        return adminService.fuzzySongs(songname);
+    }
+
+    @GetMapping(value="/api/getAlbumBySingerName")
+    public Object getAlbumBySingerName(@Param("singername") String singername){
+        return adminService.getAlbumBySingerName(singername);
+    }
+
+    @GetMapping(value="/api/getSongBySAName")
+    public Object getSongBySAName(@Param("singername") String singername,@Param("albumname") String albumname){
+        return adminService.getSongBySAName(singername, albumname);
     }
 
 

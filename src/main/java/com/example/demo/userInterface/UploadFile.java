@@ -28,18 +28,14 @@ import java.util.UUID;
 import org.apache.http.protocol.HttpContext;
 
 /**
- * 文件上传控制器
+ * 文件上传控制器:to tencent cloud COS
  */
 @RestController
 @CrossOrigin
 public class UploadFile {
-    /**
-     * 上传道腾讯云服务器（https://cloud.tencent.com/document/product/436/10199）
-     * @return
-     */
 
     @PostMapping(value = "/uploadSingerImg")
-    public Object Upload(@Param(value = "file") MultipartFile file){
+    public Object uploadSingerImg(@Param(value = "file") MultipartFile file){
         // 1 初始化用户身份信息(secretId, secretKey)
         COSCredentials cred = new BasicCOSCredentials("AKID6yd3LRevHOmwqaznJacbMsWw78uR4T1S", "LSLyMdhYEfroX5YtCFJ8iGfz4tDRWWZO");
         // 2 设置bucket的区域, COS地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
@@ -57,6 +53,97 @@ public class UploadFile {
             file.transferTo(localFile);
             // 指定要上传到 COS 上的路径
             String key = "images/singers/"+file.getOriginalFilename();
+            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
+            PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest);
+            return putObjectRequest.getKey();
+        } catch (IOException e) {
+            return false;
+        }finally {
+            // 关闭客户端(关闭后台线程)
+            cosclient.shutdown();
+        }
+    }
+
+    @PostMapping(value = "/uploadAlbumImg")
+    public Object uploadAlbumImg(@Param(value = "file") MultipartFile file){
+        // 1 初始化用户身份信息(secretId, secretKey)
+        COSCredentials cred = new BasicCOSCredentials("AKID6yd3LRevHOmwqaznJacbMsWw78uR4T1S", "LSLyMdhYEfroX5YtCFJ8iGfz4tDRWWZO");
+        // 2 设置bucket的区域, COS地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
+        ClientConfig clientConfig = new ClientConfig(new Region("ap-shanghai"));
+        // 3 生成cos客户端
+        COSClient cosclient = new COSClient(cred, clientConfig);
+        // bucket的命名规则为{name}-{appid} ，此处填写的存储桶名称必须为此格式
+        String bucketName = "2019-music-1258503590";
+
+        // 简单文件上传, 最大支持 5 GB, 适用于小文件上传, 建议 20 M 以下的文件使用该接口
+        // 大文件上传请参照 API 文档高级 API 上传
+        File localFile = null;
+        try {
+            localFile = File.createTempFile("temp",null);
+            file.transferTo(localFile);
+            // 指定要上传到 COS 上的路径
+            String key = "images/albums/"+file.getOriginalFilename();
+            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
+            PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest);
+            return putObjectRequest.getKey();
+        } catch (IOException e) {
+            return false;
+        }finally {
+            // 关闭客户端(关闭后台线程)
+            cosclient.shutdown();
+        }
+    }
+
+    @PostMapping(value = "/uploadSongImg")
+    public Object uploadSongImg(@Param(value = "file") MultipartFile file){
+        // 1 初始化用户身份信息(secretId, secretKey)
+        COSCredentials cred = new BasicCOSCredentials("AKID6yd3LRevHOmwqaznJacbMsWw78uR4T1S", "LSLyMdhYEfroX5YtCFJ8iGfz4tDRWWZO");
+        // 2 设置bucket的区域, COS地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
+        ClientConfig clientConfig = new ClientConfig(new Region("ap-shanghai"));
+        // 3 生成cos客户端
+        COSClient cosclient = new COSClient(cred, clientConfig);
+        // bucket的命名规则为{name}-{appid} ，此处填写的存储桶名称必须为此格式
+        String bucketName = "2019-music-1258503590";
+
+        // 简单文件上传, 最大支持 5 GB, 适用于小文件上传, 建议 20 M 以下的文件使用该接口
+        // 大文件上传请参照 API 文档高级 API 上传
+        File localFile = null;
+        try {
+            localFile = File.createTempFile("temp",null);
+            file.transferTo(localFile);
+            // 指定要上传到 COS 上的路径
+            String key = "images/songs/"+file.getOriginalFilename();
+            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
+            PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest);
+            return putObjectRequest.getKey();
+        } catch (IOException e) {
+            return false;
+        }finally {
+            // 关闭客户端(关闭后台线程)
+            cosclient.shutdown();
+        }
+    }
+
+    @PostMapping(value = "/uploadSong")
+    public Object uploadSong(@Param(value = "file") MultipartFile file){
+        // 1 初始化用户身份信息(secretId, secretKey)
+        COSCredentials cred = new BasicCOSCredentials("AKID6yd3LRevHOmwqaznJacbMsWw78uR4T1S", "LSLyMdhYEfroX5YtCFJ8iGfz4tDRWWZO");
+        // 2 设置bucket的区域, COS地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
+        ClientConfig clientConfig = new ClientConfig(new Region("ap-shanghai"));
+        // 3 生成cos客户端
+        COSClient cosclient = new COSClient(cred, clientConfig);
+        // bucket的命名规则为{name}-{appid} ，此处填写的存储桶名称必须为此格式
+        String bucketName = "2019-music-1258503590";
+
+        // 简单文件上传, 最大支持 5 GB, 适用于小文件上传, 建议 20 M 以下的文件使用该接口
+        // 大文件上传请参照 API 文档高级 API 上传
+        File localFile = null;
+        try {
+            localFile = File.createTempFile("temp",null);
+            file.transferTo(localFile);
+            // 指定要上传到 COS 上的路径
+            
+            String key = "songs/"+file.getOriginalFilename();
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, localFile);
             PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest);
             return putObjectRequest.getKey();

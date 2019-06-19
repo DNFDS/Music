@@ -74,5 +74,13 @@ public interface AdminService {
 
 	String changeSingerImg(String singerid,String url);
 
+	ArrayList<Album> fuzzyAlbums(String albumname);
+
+	ArrayList<Song> fuzzySongs(String songname);
+
+	ArrayList<String> getAlbumBySingerName(String singername);
+	
+	ArrayList<String> getSongBySAName(String singername,String albumname);
+
 }
 

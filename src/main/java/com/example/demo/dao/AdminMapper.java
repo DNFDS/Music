@@ -39,5 +39,9 @@ public interface AdminMapper {
     void getSongs(Map<String,Object> map);
     void fuzzySingers(Map<String,Object> map);
     void changeSingerImg(Map<String,Object> map);
+    void fuzzyAlbums(Map<String,Object> map);
+    void fuzzySongs(Map<String,Object> map);
+    void getSongBySAName(Map<String,Object> map);
+    void getAlbumBySingerName(Map<String,Object> map);
 
 }
